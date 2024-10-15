@@ -1,0 +1,5 @@
+show_cpu=-2
+show_icon=false
+show_label_governor=false
+keep_compact=true
+
