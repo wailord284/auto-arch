@@ -16,7 +16,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - XFCE configured and themed with whiskermenu
 - Support for [EXT4](https://wiki.archlinux.org/index.php/Ext4), [XFS](https://wiki.archlinux.org/index.php/XFS), [F2FS](https://wiki.archlinux.org/title/F2FS), [Bcachefs](https://wiki.archlinux.org/title/Bcachefs) or [BTRFS](https://wiki.archlinux.org/index.php/Btrfs) filesystems
     * NOTE: Bcachefs is created with discard/trim support however fstrim reports the discard operation is unsupported
-    * EXT4 will use [fast_commit](https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit_in_existing_filesystems)
+    * EXT4 will use [fast_commit](https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit)
     * F2FS will use [ZSTD level 6 compression](https://wiki.archlinux.org/title/F2FS#Compression)
     * BTRFS will use [zstd (level 3) and force compression](https://wiki.archlinux.org/index.php/Btrfs#Compression)
     * BTRFS scrub timer (monthly) will be enabled for the root directory
