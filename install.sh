@@ -639,7 +639,7 @@ clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing additional desktop software" \
---prgbox "Installing Aurmageddon packages" "arch-chroot /mnt pacman -S trizen ttf-symbola pokemon-colorscripts-git arch-silence-grub-theme-git bibata-cursor-translucent usbimager matcha-gtk-theme nordic-theme nordic-darker-standard-buttons-theme pacman-cleanup-hook ttf-unifont lscolors-git zramswap pacman-updatedb-hook needrestart redshift-minimal zafiro-icon-theme nulloy firefox-extension-localcdn --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing Aurmageddon packages" "arch-chroot /mnt pacman -S trizen ttf-symbola pokemon-colorscripts-git arch-silence-grub-theme-git bibata-cursor-translucent usbimager matcha-gtk-theme nordic-theme nordic-darker-standard-buttons-theme pacman-cleanup-hook ttf-unifont lscolors-git zramswap pacman-updatedb-hook redshift-minimal zafiro-icon-theme nulloy firefox-extension-localcdn --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 
 
@@ -913,9 +913,8 @@ mv "$configFiles"/configs/scripts/* /mnt/opt/scripts/
 
 
 ###PACMAN HOOKS###
-#Add the needrestart and grub reinstall pacman hook
+#Add the grub reinstall pacman hook
 mkdir -p /mnt/etc/pacman.d/hooks/
-mv "$configFiles"/configs/pacman-hooks/needrestart.hook /mnt/etc/pacman.d/hooks/
 mv "$configFiles"/configs/pacman-hooks/update-grub.hook /mnt/etc/pacman.d/hooks/
 mv "$configFiles"/configs/pacman-hooks/clean-pacman-cache.hook /mnt/etc/pacman.d/hooks/
 
@@ -995,9 +994,6 @@ echo 'tcp_bbr' > /mnt/etc/modules-load.d/tcp_bbr.conf
 
 
 ###LY - DISPLAY MANAGER###
-#Make sure needrestart does not restart ly
-sed 's,xdm,ly,g' -i /mnt/etc/needrestart/needrestart.conf
-mv "$configFiles"/configs/no-restart.conf /mnt/etc/needrestart/conf.d/
 #Configure ly to animate and show more info
 sed "s,animation = none,animation = doom,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock = false,bigclock = true,g" -i /mnt/etc/ly/config.ini
@@ -1158,9 +1154,10 @@ echo "$green""4$reset - Enable and install the UFW firewall"
 echo "$green""5$reset - Use the iwd wifi backend over wpa_suplicant for NetworkManager"
 echo "$green""6$reset - Block ads system wide using hblock to modify the hosts file $green(recommended)"
 echo "$green""7$reset - Encrypt and cache DNS requests with dns-over-https"
+echo "$green""8$reset - Enable needrestart to restart outdated services"
 
 echo "$reset""Default options are:$green 6 $red q""$reset"
-echo "Enter$green 1-7$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
+echo "Enter$green 1-8$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
 read -r -p "Options: " selection
 selection=${selection:- 6 q}
 	for entry in $selection ; do
@@ -1232,6 +1229,16 @@ selection=${selection:- 6 q}
 		mv "$configFiles"/configs/dns-https/dns.conf /mnt/etc/NetworkManager/conf.d/
 		#Enable service
 		arch-chroot /mnt systemctl enable doh-client.service
+		sleep 3s
+		;;
+
+		8) #Needrestart
+		echo "$green""Setting up needrestart""$reset"
+		arch-chroot /mnt pacman -S needrestart --noconfirm
+		#Make sure needrestart does not restart ly
+		sed 's,xdm,ly,g' -i /mnt/etc/needrestart/needrestart.conf
+		mv "$configFiles"/configs/no-restart.conf /mnt/etc/needrestart/conf.d/
+		mv "$configFiles"/configs/pacman-hooks/needrestart.hook /mnt/etc/pacman.d/hooks/
 		sleep 3s
 		;;
 
