@@ -78,7 +78,7 @@ The user will now be prompted to supply basic information such as hostname, user
     * Arch Linux [theme](https://github.com/fghibellini/arch-silence)
 - Pacman changes:
     * [Kernel Modules hook](https://github.com/saber-nyan/kernel-modules-hook) - Restore functionality when the running kernel updates
-    * [Needrestart hook](https://github.com/liske/needrestart) - Restart outdated libraries
+    * [Needrestart hook](https://github.com/liske/needrestart) - Restart outdated libraries (OPTIONAL)
     * Package cleanup hook to minimize the pacman cache size when updating
     * Update and reinstall grub hook after grub updates
     * Verbose Package changes, Color, Parallel downloads
