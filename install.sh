@@ -586,10 +586,7 @@ echo "$host" >> /mnt/etc/hostname
 cat << EOF > /mnt/etc/hosts
 127.0.0.1 localhost
 127.0.1.1 $host
-#For IPv6 hosts
-::1     ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
+::1     localhost ip6-localhost ip6-loopback
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOF
