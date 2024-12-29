@@ -40,7 +40,6 @@ user_pref("device.sensors.motion.enabled", false);
 user_pref("device.sensors.orientation.enabled", false);
 user_pref("device.sensors.proximity.enabled", false);
 user_pref("dom.battery.enabled", false);
-user_pref("dom.event.clipboardevents.enabled", false);
 user_pref("dom.private-attribution.submission.enabled", false);
 user_pref("dom.security.https_only_mode", true);
 user_pref("dom.security.https_only_mode_ever_enabled", true);
@@ -57,7 +56,8 @@ user_pref("extensions.pocket.enabled", false);
 user_pref("extensions.shield-recipe-client.api_url", "");
 user_pref("extensions.shield-recipe-client.enabled", false);
 user_pref("extensions.webservice.discoverURL", "");
-user_pref("media.autoplay.default", 2);
+user_pref("media.autoplay.default", 0);
+user_pref("media.autoplay.enabled", true);
 user_pref("media.eme.enabled", false);
 user_pref("media.gmp-widevinecdm.enabled", false);
 user_pref("media.navigator.enabled", false);
@@ -68,8 +68,6 @@ user_pref("network.allow-experiments", false);
 user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.cookie.cookieBehavior", 1);
 user_pref("network.http.referer.spoofSource", true);
-user_pref("privacy.donottrackheader.enabled", true);
-user_pref("privacy.donottrackheader.value", 1);
 user_pref("privacy.firstparty.isolate", true);
 user_pref("privacy.query_stripping", true);
 user_pref("privacy.trackingprotection.cryptomining.enabled", true);
@@ -99,6 +97,7 @@ user_pref("webgl.disabled", true);
 user_pref("webgl.renderer-string-override", " ");
 user_pref("webgl.vendor-string-override", " ");
 
+
 //From Betterfox
 //###Fastfox###
 //GPU Accelerated Canvas
@@ -107,9 +106,8 @@ user_pref("gfx.canvas.accelerated.cache-items", 4096); // default=2048; alt=8192
 user_pref("gfx.canvas.accelerated.cache-size", 512); // default=256; alt=1024
 user_pref("gfx.content.skia-font-cache-size", 20); // default=5; Chrome=20
 //VA-API
-user_pref("media.ffmpeg.vaapi.enabled", true); // LINUX
-//Javascript cache compression
-user_pref("browser.cache.jsbc_compression_level", 3); //default=0
+user_pref("media.ffmpeg.vaapi.enabled", true);
+user_pref("layers.mlgpu.enabled", true);
 //Media memory cache
 user_pref("media.memory_cache_max_size", 65536); // default=8192; AF=65536; alt=131072
 //Video buffering
@@ -125,9 +123,8 @@ user_pref("network.http.max-connections", 1800); // default=900
 user_pref("network.http.max-persistent-connections-per-server", 10); // default=6; download connections; anything above 10 is excessive
 user_pref("network.http.max-urgent-start-excessive-connections-per-host", 5); // default=3
 //DNS and TLS
-user_pref("network.dns.max_high_priority_threads", 8); // default=5
 user_pref("network.ssl_tokens_cache_capacity", 10240); // default=2048; more TLS token caching (fast reconnects)
-user_pref("network.dns.disablePrefetch", false);
+user_pref("network.dnsCacheEntries", 1000); // default=400
 //Prefetching
 user_pref("network.predictor.enabled", true);
 user_pref("network.prefetch-next", true);
@@ -136,14 +133,15 @@ user_pref("network.prefetch-next", true);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.vpn_promo.enabled", false);
+user_pref("browser.privatebrowsing.vpnpromourl", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.aboutwelcome.enabled", false);
 //Profile switcher
 user_pref("browser.profiles.enabled", true);
-//Hide all tab button
-user_pref("browser.tabs.tabmanager.enabled", false);
+//Use GTK bar
+user_pref("widget.gtk.non-native-titlebar-buttons.enabled", true);
 //Dark theme
 user_pref("layout.css.prefers-color-scheme.content-override", 0);
 //Deny cookies if it is a 1 button press
@@ -157,7 +155,7 @@ user_pref("browser.download.open_pdf_attachments_inline", true);
 //Delete temp files for downloads
 user_pref("browser.download.start_downloads_in_tmp_dir", true);
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
-//Do not track
+//Do not sell my data
 user_pref("privacy.globalprivacycontrol.enabled", true);
 //Show a warning on the padlock icon for broken sites
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
