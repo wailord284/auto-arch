@@ -34,7 +34,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Automatic detection for Intel and AMD CPUs to [install correct microcode](https://wiki.archlinux.org/index.php/Microcode#Installation)
 - Support for [Wacom touchscreen devices](https://wiki.archlinux.org/title/Graphics_tablet#Through_Xorg.conf) (like the Thinkpad X201T/X220T)
 - Disabled ["Recents"](https://alexcabal.com/disabling-gnomes-recently-used-file-list-the-better-way) tab found in most file managers
-- Large amount of [sysctl configs](https://wiki.archlinux.org/index.php/Sysctl#Improving_performance) gathered from the Arch wiki to increase performance and stability
+- Large amount of [sysctl configs](https://wiki.archlinux.org/index.php/Sysctl#Improving_performance) gathered from the Arch wiki to increase performance, stability and security
 - Automatic log rotation with [logrotate](https://wiki.archlinux.org/title/Logrotate)
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
 - [lz4 mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION) to decrease boot times
