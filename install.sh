@@ -1045,7 +1045,7 @@ arch-chroot /mnt systemctl enable reflector.timer > /dev/null 2>&1
 
 
 ###SYSCTL RULES###
-#Allow unprivileged_userns_clone for programs like Zoom. Disabled by default
+#Allow unprivileged_userns_clone for programs like Flatpak. Disabled by default
 mv "$configFiles"/configs/sysctl/00-unprivileged-userns.conf /mnt/etc/sysctl.d/
 #Low-level console messages
 mv "$configFiles"/configs/sysctl/10-console-messages.conf /mnt/etc/sysctl.d/
