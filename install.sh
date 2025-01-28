@@ -1157,9 +1157,10 @@ echo "$green""5$reset - Use the iwd wifi backend over wpa_suplicant for NetworkM
 echo "$green""6$reset - Block ads system wide using hblock to modify the hosts file $green(recommended)"
 echo "$green""7$reset - Encrypt and cache DNS requests with dns-over-https"
 echo "$green""8$reset - Enable needrestart to restart outdated services"
+echo "$green""9$reset - Install Lutris, Wine and Libraries for gaming"
 
 echo "$reset""Default options are:$green 6 $red q""$reset"
-echo "Enter$green 1-8$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
+echo "Enter$green 1-9$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
 read -r -p "Options: " selection
 selection=${selection:- 6 q}
 	for entry in $selection ; do
@@ -1241,6 +1242,13 @@ selection=${selection:- 6 q}
 		sed 's,xdm,ly,g' -i /mnt/etc/needrestart/needrestart.conf
 		mv "$configFiles"/configs/no-restart.conf /mnt/etc/needrestart/conf.d/
 		mv "$configFiles"/configs/pacman-hooks/needrestart.hook /mnt/etc/pacman.d/hooks/
+		sleep 3s
+		;;
+
+		9) #Lutris
+		echo "$green""Setting up Lutris""$reset"
+		arch-chroot /mnt pacman -S lutris wine-staging --noconfirm
+		arch-chroot /mnt pacman -S --needed --asdeps giflib lib32-giflib gnutls lib32-gnutls v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib sqlite lib32-sqlite libxcomposite lib32-libxcomposite ocl-icd lib32-ocl-icd libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2 lib32-sdl2
 		sleep 3s
 		;;
 
