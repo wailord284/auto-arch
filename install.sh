@@ -893,7 +893,7 @@ mv "$configFiles"/configs/udev/60-ioschedulers.rules /mnt/etc/udev/rules.d/
 #HDParm rule to spin down drives after 20 idle minutes. Increases access times after idle periods but increases HDD life
 mv "$configFiles"/configs/udev/69-hdparm.rules /mnt/etc/udev/rules.d/
 #Hard drive power saving
-mv "$configFiles"/configs/udev/hd_power_save.rules /mnt/etc/udev/rules.d/
+mv "$configFiles"/configs/udev/81-hd_power_save.rules /mnt/etc/udev/rules.d/
 
 
 ###POLKIT RULES###
@@ -961,6 +961,7 @@ if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery
 	mv "$configFiles"/configs/udev/81-wifi-powersave.rules /mnt/etc/udev/rules.d/
 	#Set WiFi region to US. Needed for some laptops like the Framework 16 to get faster speeds
 	sed "s,#WIRELESS_REGDOM=\"US\",WIRELESS_REGDOM=\"US\",g" -i /mnt/etc/conf.d/wireless-regdom
+	clear
 fi
 
 
