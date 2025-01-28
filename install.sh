@@ -82,11 +82,11 @@ pacman-key --populate
 clear
 
 
-###WELCOME MESSAGE 2###
+###WELCOME MESSAGE###
 dialog --title "Welcome!" \
 --backtitle "$dialogBacktitle" \
 --ok-label "Begin" \
---msgbox "$(printf %"s\n\n" "Welcome to the Auto Arch install script!" "Please note, no changes will be made to the system until the final confirmation prompt at the end." "Press control + C to cancel at any time and return to the archiso.")" \
+--msgbox "$(printf %"s\n\n" "Welcome to the Auto Arch install script!" "No changes will be made to the system until the final confirmation prompt at the end." "Press control + C to cancel at any time.")" \
 "$dialogHeight" "$dialogWidth"
 clear
 
@@ -101,7 +101,7 @@ while : ; do
 	consoleKeymap=(dialog --backtitle "$dialogBacktitle" \
 		--title "Keymap" \
 		--scrollbar \
-		--radiolist "Press space to select your keymap for your keyboard. This is used to ensure all menus can be operated using your keyboard and so all keys actually work as intended." "$HEIGHT" "$WIDTH" "$CHOICE_HEIGHT")
+		--radiolist "Press space to select an appropriate keymap for your keyboard." "$HEIGHT" "$WIDTH" "$CHOICE_HEIGHT")
 	IFS=" " read -r -a options <<< "${MENU_OPTIONS}"
 	keymap=$("${consoleKeymap[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#Check if the value is set
@@ -143,7 +143,7 @@ while : ; do
 		--backtitle "$dialogBacktitle" \
 		--passwordbox "Please enter a password for user $user (Hidden)." "$dialogHeight" "$dialogWidth" 2>&1 > /dev/tty)
 	#pass2
-	pass2=$(dialog --no-cancel --title "Password" \
+	pass2=$(dialog --no-cancel --title "Password Confirmation" \
 		--backtitle "$dialogBacktitle" \
 		--passwordbox "Please enter the same password again for user $user (Hidden)." "$dialogHeight" "$dialogWidth" 2>&1 > /dev/tty)
 	if [ "$pass1" = "$pass2" ]; then
@@ -167,7 +167,7 @@ clear
 ###LOCALE###
 unset COUNT MENU_OPTIONS options
 COUNT=0
-#Replace space with '+' to avoid splitting, then remove leading the #
+#Replace space with '+' to avoid splitting, then remove the leading #
 for i in $(tail -n+18 /etc/locale.gen | sed -e '/ISO-8859/d' -e 's/  $//' -e 's, ,+,g' -e 's,#,,g') ; do
 	COUNT=$((COUNT+1))
 	MENU_OPTIONS="${MENU_OPTIONS} $i ${COUNT} off"
@@ -203,7 +203,7 @@ timezone=$(curl -s https://ipinfo.io/timezone)
 
 
 ###DISK SELECTION###
-#Eventually this will get its own function when i figure it out
+#Eventually this will get its own function when I figure it out
 declare -a storagePartitions
 while : ; do
 	#Choose disk to install to - $storage.
@@ -216,8 +216,8 @@ while : ; do
 	done
 	targetDisk=(dialog --backtitle "$dialogBacktitle" \
 		--scrollbar \
-		--title "Target installation drive" \
-		--radiolist "Press space to select your drive. No data will be written at this point." "$HEIGHT" "$WIDTH" "$CHOICE_HEIGHT")
+		--title "Operating System Drive" \
+		--radiolist "Press space to select a drive for the new installtion. No changes will be made yet." "$HEIGHT" "$WIDTH" "$CHOICE_HEIGHT")
 	IFS=" " read -r -a options <<< "${MENU_OPTIONS}"
 	installDisk=$("${targetDisk[@]}" "${options[@]}" 2>&1 >/dev/tty)
 	#Remove '|'
@@ -272,7 +272,7 @@ clear
 dialog --title "Disk Encryption" \
 	--defaultno \
 	--backtitle "$dialogBacktitle" \
-	--yesno "$(printf %"s\n\n" "Do you want to enable disk encryption for the root partition?" "If you do not know what this means you can safely press no.")" "$dialogHeight" "$dialogWidth" > /dev/tty 2>&1
+	--yesno "$(printf %"s\n\n" "Do you want to enable disk encryption for the root partition?" "You will be prompted on every boot to decrypt the drive.")" "$dialogHeight" "$dialogWidth" > /dev/tty 2>&1
 optionEncrypt=$?
 if [ "$optionEncrypt" = 0 ]; then
 	encrypt="y"
@@ -292,7 +292,7 @@ while : ; do
 		--passwordbox "Please enter a password to encrypt your disk (Hidden)." "$dialogHeight" "$dialogWidth" 2>&1 > /dev/tty)
 	encpass1=${encpass1:-pass}
 	#encpass2
-	encpass2=$(dialog --no-cancel --title "Disk Encryption Password" \
+	encpass2=$(dialog --no-cancel --title "Disk Encryption Password Confirmation" \
 		--backtitle "$dialogBacktitle" \
 		--passwordbox "Please enter your password again to encrypt your disk (Hidden)." "$dialogHeight" "$dialogWidth" 2>&1 > /dev/tty)
 	encpass2=${encpass2:-pass}
@@ -327,7 +327,7 @@ grubPerformanceOptions="mitigations=off transparent_hugepage=madvise nowatchdog 
 dialog --title "Performance Options" \
 	--defaultno \
 	--backtitle "$dialogBacktitle" \
-	--yesno "$(printf %"s\n\n" "Do you want to disable spectre and meltdown mitigations? These options can improve performance at the cost of security. This is most impactful on systems older than 10th generation Intel or 1st generation AMD Ryzen processors." "This option will also disable Watchdog which can reduce power consumption and decrease boot times." "If you do not know what this means you can safely press no." "The following options will be added to Grub if you say yes and the grub timeout will be set to 1 second: $grubPerformanceOptions")" "$dialogHeight" "$dialogWidth" > /dev/tty 2>&1
+	--yesno "$(printf %"s\n\n" "Do you want to disable spectre and meltdown mitigations? These options can improve performance at the cost of security. This is most impactful on systems older than 10th generation Intel or 1st generation AMD Ryzen processors." "This option will also disable Watchdog which can reduce power consumption and decrease boot times." "Press no if you do not know the implications of this." "The following options will be added to Grub if you say yes and the grub timeout will be set to 1 second: $grubPerformanceOptions")" "$dialogHeight" "$dialogWidth" > /dev/tty 2>&1
 optionEnableGrubPerformanceOptions=$?
 if [ "$optionEnableGrubPerformanceOptions" = 0 ]; then
 	enableGrubPerformanceOptions="y"
@@ -342,7 +342,7 @@ clear
 dialog --backtitle "$dialogBacktitle" \
 --defaultno \
 --title "Do you want to install with the following options?" \
---yesno "$(printf %"s\n" "Do you want to proceed with the installation? If you press yes, all data on the drive will be lost!" "Hostname: $host" "Username: $user" "Encryption: $encrypt" "Locale: $locale" "Keymap: $keymap" "Timezone: $timezone" "Mirrorlist location: $region" "Filesystem: $filesystem" "Install Disk: $storage" "Secure Wipe: $wipe" "Disable Mitigations: $enableGrubPerformanceOptions")" "$HEIGHT" "$WIDTH"
+--yesno "$(printf %"s\n" "Do you want to proceed with the installation? If you press yes, ALL DATA ON THE DRIVE WILL BE LOST!" "Hostname: $host" "Username: $user" "Encryption: $encrypt" "Locale: $locale" "Keymap: $keymap" "Timezone: $timezone" "Mirrorlist location: $region" "Filesystem: $filesystem" "Install Disk: $storage" "Secure Wipe: $wipe" "Performance Options: $enableGrubPerformanceOptions")" "$HEIGHT" "$WIDTH"
 finalInstall=$?
 if [ "$finalInstall" = 0 ]; then
 	dialog --backtitle "$dialogBacktitle" \
@@ -374,7 +374,7 @@ if [ -d /sys/firmware/efi/ ]; then
 else
 	boot="bios" #Set boot to bios
 fi
-#Also detect the boot arch. Some platforms have a 32bit UEFI (NOT to be confused with 32bit cpu)
+#Detect the boot arch for weird older devices with a 32-bit UEFI (NOT to be confused with 32-bit CPU).
 if [ "$boot" = "efi" ]; then
 	bootArch="$(cat /sys/firmware/efi/fw_platform_size)"
 fi
@@ -409,12 +409,12 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		#If encryption is set make rootTargetDisk the cryptroot mapper. Otherwise set it to ${storagePartitions[2]}
 		rootTargetDisk=/dev/mapper/cryptroot
 		#Run cryptsetup just in terminal. The password will be piped in from $encpass
-		echo "$green""Setting up disk encryption. Please wait.""$reset"
+		echo "$green""Setting up disk encryption. Please wait and ignore any warnings.""$reset"
 		echo "$encpass" | cryptsetup --type luks2 --iter-time 5000 --cipher aes-xts-plain64 --key-size 512 --pbkdf argon2id luksFormat "${storagePartitions[2]}"
-		#If the device is an SSD disable workqueue - https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
+		#If the drive is an SSD disable workqueue - https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance
 		if [ "$deviceUsesSSD" = yes ]; then
 			echo "$encpass" | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent open "${storagePartitions[2]}" cryptroot
-			#Refresh the device to force the workqueue options
+			#Refresh the device to enforce the workqueue options
 			echo "$encpass" | cryptsetup --allow-discards --perf-no_read_workqueue --perf-no_write_workqueue --persistent refresh cryptroot
 		else
 			echo "$encpass" | cryptsetup open "${storagePartitions[2]}" cryptroot
@@ -427,23 +427,23 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	#Filesystem creation
 	if [ "$filesystem" = ext4 ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Patitioning Disk" \
+		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "mkfs.ext4 -O fast_commit -L ArchRoot $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	elif [ "$filesystem" = xfs ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Patitioning Disk" \
+		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "mkfs.xfs -f -L ArchRoot $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	elif [ "$filesystem" = f2fs ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Patitioning Disk" \
+		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "mkfs.f2fs -f -l ArchRoot -O extra_attr,inode_checksum,sb_checksum,compression,encrypt $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	elif [ "$filesystem" = btrfs ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Patitioning Disk" \
+		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "mkfs.btrfs --features block-group-tree -f -L ArchRoot $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	elif [ "$filesystem" = bcachefs ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Patitioning Disk" \
+		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "bcachefs format -f -L ArchRoot --discard --compression=zstd --background_compression=zstd $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	fi
 
@@ -481,7 +481,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 
 	#Mount and partition the boot partition
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Patitioning Disk" \
+	--title "Partitioning Disk" \
 	--prgbox "Formatting boot partition" "mkfs.fat -F32 -n ArchBoot ${storagePartitions[1]}" "$HEIGHT" "$WIDTH"
 	mount --mkdir "${storagePartitions[1]}" /mnt/boot
 fi
@@ -519,17 +519,17 @@ sed "s,\#\Color,Color,g" -i /mnt/etc/pacman.conf
 ###KERNEL, FIRMWARE, BASE-DEVEL AND MICROCODE INSTALLATION###
 #Install additional base Archlinux packages and kernel
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Installing additional base software" \
+--title "Base Software" \
 --prgbox "Installing base-devel package group and kernel" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S base-devel linux linux-headers linux-firmware mkinitcpio grub efibootmgr dosfstools mtools btrfs-progs dbus-broker dbus-broker-units --noconfirm" "$HEIGHT" "$WIDTH"
-#Install amd or intel ucode based on detected cpu
+#Install AMD or Intel microcode based on detected cpu
 cpuVendor=$(grep -m 1 "vendor" /proc/cpuinfo | grep -o "Intel")
 if [ "$cpuVendor" = Intel ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Autodetected Intel CPU" \
+	--title "Detected Intel CPU" \
 	--prgbox "Installing Intel Microcode" "arch-chroot /mnt pacman -S intel-ucode --noconfirm" "$HEIGHT" "$WIDTH"
 else
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Autodetected AMD CPU" \
+	--title "Detected AMD CPU" \
 	--prgbox "Installing AMD Microcode" "arch-chroot /mnt pacman -S amd-ucode --noconfirm" "$HEIGHT" "$WIDTH"
 fi
 clear
@@ -567,8 +567,8 @@ arch-chroot /mnt ln -sf /usr/share/zoneinfo/"$timezone" /etc/localtime
 #Set clock
 sed "s,\#$locale,$locale,g" -i /mnt/etc/locale.gen
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Configuring system..." \
---prgbox "Setting locale and system clock" "arch-chroot /mnt locale-gen && arch-chroot /mnt hwclock --systohc" "$HEIGHT" "$WIDTH"
+--title "Clock and Locale" \
+--prgbox "Setting up locale and system clock" "arch-chroot /mnt locale-gen && arch-chroot /mnt hwclock --systohc" "$HEIGHT" "$WIDTH"
 #Set language
 lang=$(echo "$locale" | cut -d ' ' -f 1)
 echo "LANG=$lang" >> /mnt/etc/locale.conf
@@ -582,7 +582,7 @@ echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
 ###HOSTNAME AND HOST FILE###
 #Set hostname
 echo "$host" >> /mnt/etc/hostname
-#Set hostname and hosts file
+#Set hosts file
 cat << EOF > /mnt/etc/hosts
 127.0.0.1 localhost
 127.0.1.1 $host
@@ -681,12 +681,12 @@ clear
 #The below installs vulkan drivers and hardware decoding for correct hardware
 if lshw -class display | grep "Advanced Micro Devices" || dmesg | grep amdgpu > /dev/null 2>&1 ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting hardware" \
+	--title "AMD Hardware" \
 	--prgbox "Found AMD Graphics card" "arch-chroot /mnt pacman -S lact opencl-rusticl-mesa vulkan-mesa-layers vulkan-radeon nvtop --noconfirm" "$HEIGHT" "$WIDTH"
 fi
 if lshw -class display | grep "Intel Corporation" || dmesg | grep "i915" > /dev/null 2>&1 ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting hardware" \
+	--title "Intel Hardware" \
 	--prgbox "Found Intel Graphics card" "arch-chroot /mnt pacman -S vulkan-intel intel-media-sdk libva-intel-driver intel-media-driver intel-gpu-tools --noconfirm" "$HEIGHT" "$WIDTH"
 fi
 clear
@@ -696,14 +696,14 @@ clear
 #Detect b43 firmware wifi cards and install b43-firmware
 if dmesg | grep -qi 'b43-phy0 ERROR'; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting hardware" \
+	--title "Wireless Hardware" \
 	--prgbox "Found B43 Broadcom Wireless card" "arch-chroot /mnt pacman -S b43-firmware --noconfirm" "$HEIGHT" "$WIDTH"
 	clear
 fi
 #Detect sof audio firmware - https://github.com/thesofproject/sof-bin/
 if dmesg | grep -qi 'sof-audio'; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting hardware" \
+	--title "Audio Hardware" \
 	--prgbox "Found missing audio firmware" "arch-chroot /mnt pacman -S sof-firmware sof-tools alsa-utils --noconfirm" "$HEIGHT" "$WIDTH"
 	clear
 fi
@@ -719,15 +719,15 @@ hypervisor=$(dmesg | grep "Hypervisor detected" | cut -d ":" -f 2 | tr -d ' ')
 manufacturer=$(systemd-detect-virt)
 if [ "$product" = "VirtualBox" ] || [ "$hypervisor" = "VirtualBox" ] || [ "$manufacturer" = "oracle" ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting virtual machine" \
+	--title "Virtual Machine" \
 	--prgbox "Running in VirtualBox - Installing guest additions" "arch-chroot /mnt pacman -S xf86-video-vmware virtualbox-guest-utils --noconfirm" "$HEIGHT" "$WIDTH"
 elif [ "$product" = "Standard PC (Q35 + ICH9, 2009)" ] || [ "$hypervisor" = "KVM" ] || [ "$manufacturer" = "kvm" ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting virtual machine" \
-	--prgbox "Running in KVM - Installing guest additions" "arch-chroot /mnt pacman -S qemu-guest-agent spice spice-vdagent xf86-video-qxl --noconfirm && arch-chroot /mnt systemctl enable qemu-guest-agent.service" "$HEIGHT" "$WIDTH"
+	--title "Virtual Machine" \
+	--prgbox "Running in QEMU/KVM - Installing guest additions" "arch-chroot /mnt pacman -S qemu-guest-agent spice spice-vdagent xf86-video-qxl --noconfirm && arch-chroot /mnt systemctl enable qemu-guest-agent.service" "$HEIGHT" "$WIDTH"
 elif [ "$product" = "VMware Virtual Platform" ] || [ "$hypervisor" = "VMware" ] || [ "$manufacturer" = "vmware" ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detecting virtual machine" \
+	--title "Virtual Machine" \
 	--prgbox "Running in VMWare - Installing guest additions" "arch-chroot /mnt pacman -S xf86-video-vmware xf86-input-vmmouse open-vm-tools --noconfirm && arch-chroot /mnt systemctl enable vmtoolsd.service vmware-vmblock-fuse.service" "$HEIGHT" "$WIDTH"
 fi
 clear
@@ -738,7 +738,7 @@ clear
 ls /dev/sr0 > /dev/null 2>&1
 if [ $? -eq 0 ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Detected Optical Drive" \
+	--title "Optical Drive" \
 	--prgbox "Installing additional optical drive software" "arch-chroot /mnt pacman -S xfburn udftools libaacs cdrtools dvd+rw-tools --noconfirm" "$HEIGHT" "$WIDTH"
 fi
 clear
@@ -790,7 +790,7 @@ sed "s,purge debug,purge \!debug,g" -i /mnt/etc/makepkg.conf
 #Download config files from github
 configFiles=auto-arch-main
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Configuring system" \
+--title "Configuring System" \
 --prgbox "Downloading config files" "wget https://github.com/wailord284/auto-arch/archive/main.zip && unzip main.zip && rm -r main.zip" "$HEIGHT" "$WIDTH"
 #Create /etc/skel dirs for configs to be applied to the new user
 mkdir -p /mnt/etc/skel/.config/{gtk-3.0,gtk-2.0,readline,kitty,psd,htop,dconf,trizen,nano}
@@ -926,7 +926,7 @@ mv "$configFiles"/configs/pacman-hooks/clean-pacman-cache.hook /mnt/etc/pacman.d
 if grep -i wacom /proc/bus/input/devices > /dev/null 2>&1 ; then
 	mv "$configFiles"/configs/xorg/72-wacom-options.conf /mnt/etc/X11/xorg.conf.d/
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Touchscreen Found" \
+	--title "Touchscreen" \
 	--prgbox "Install Touchscreen driver" "arch-chroot /mnt pacman -S xf86-input-wacom iio-sensor-proxy --noconfirm" "$HEIGHT" "$WIDTH"
 	clear
 fi
@@ -942,7 +942,7 @@ if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery
 	mv "$configFiles"/configs/systemd/powertop.service /mnt/etc/systemd/system/
 	#Install power saving tools and enable tlp
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Laptop Found" \
+	--title "Laptop" \
 	--prgbox "Setting up powersaving features" "arch-chroot /mnt pacman -S iw wireless-regdb ethtool powertop x86_energy_perf_policy xf86-input-synaptics tlp tlp-rdw --noconfirm && arch-chroot /mnt systemctl enable tlp.service" "$HEIGHT" "$WIDTH"
 	#Add touchpad config
 	mv "$configFiles"/configs/xorg/70-synaptics.conf /mnt/etc/X11/xorg.conf.d/
@@ -969,7 +969,7 @@ fi
 #lAdd some extra software and configs when using BTRFS
 if [ "$filesystem" = btrfs ] ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "Installing Additional Software and Regenerating initramfs for BTRFS" \
+	--title "BTRFS Configuration" \
 	--prgbox "Adding configs and software for BTRFS. This may take a moment and may appear frozen. Please wait..." "arch-chroot /mnt pacman -S snapper snap-pac btrfs-assistant udisks2-btrfs --noconfirm" "$HEIGHT" "$WIDTH"
 	#Add the btrfs binary to mkinitcpio for recovery situations
 	sed "s,BINARIES=(),BINARIES=(btrfs),g" -i /mnt/etc/mkinitcpio.conf
@@ -1065,11 +1065,11 @@ mv "$configFiles"/configs/sysctl/50-dirty-bytes.conf /mnt/etc/sysctl.d/
 if [ "$boot" = efi ]; then
 	if [ "$bootArch" = 64 ]; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "GRUB installation" \
+		--title "Bootloader" \
 		--prgbox "Installing grub for UEFI" "arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable --recheck" "$HEIGHT" "$WIDTH"
 	else
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "GRUB installation" \
+		--title "Bootloader" \
 		--prgbox "Installing grub for 32-bit UEFI" "arch-chroot /mnt grub-install --target=i386-efi --efi-directory=/boot --bootloader-id=GRUB --removable --recheck" "$HEIGHT" "$WIDTH"
 	fi
 	#Install memtest86 for UEFI
@@ -1079,7 +1079,7 @@ if [ "$boot" = efi ]; then
 fi
 if [ "$boot" = bios ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-	--title "GRUB installation" \
+	--title "Bootloader" \
 	--prgbox "Installing grub for legacy BIOS" "arch-chroot /mnt grub-install --target=i386-pc $storage --recheck" "$HEIGHT" "$WIDTH"
 	#Install memtest86 for BIOS
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
@@ -1141,7 +1141,7 @@ mv "$configFiles"/configs/grub/games/*.efi /mnt/boot/EFI/games/
 mv "$configFiles"/configs/grub/custom.cfg /mnt/boot/grub/
 #Generate grubcfg
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Configuring grub" \
+--title "GRUB Configuration" \
 --prgbox "Generating grubcfg" "arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg" "$HEIGHT" "$WIDTH"
 clear
 
@@ -1160,7 +1160,6 @@ echo "$green""7$reset - Encrypt and cache DNS requests with dns-over-https"
 echo "$green""8$reset - Enable needrestart to restart outdated services"
 echo "$green""9$reset - Install Lutris, Wine and Libraries for gaming"
 
-echo "$reset""Default options are:$green 6 $red q""$reset"
 echo "Enter$green 1-9$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
 read -r -p "Options: " selection
 selection=${selection:- q}
