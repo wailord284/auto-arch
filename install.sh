@@ -694,14 +694,14 @@ clear
 
 ###ADDITIONAL FIRMWARE CHECK/SETUP###
 #Detect b43 firmware wifi cards and install b43-firmware
-if dmesg | grep -q 'b43-phy0 ERROR'; then
+if dmesg | grep -qi 'b43-phy0 ERROR'; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Detecting hardware" \
 	--prgbox "Found B43 Broadcom Wireless card" "arch-chroot /mnt pacman -S b43-firmware --noconfirm" "$HEIGHT" "$WIDTH"
 	clear
 fi
 #Detect sof audio firmware - https://github.com/thesofproject/sof-bin/
-if dmesg | grep -q 'sof-audio'; then
+if dmesg | grep -qi 'sof-audio'; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Detecting hardware" \
 	--prgbox "Found missing audio firmware" "arch-chroot /mnt pacman -S sof-firmware sof-tools alsa-utils --noconfirm" "$HEIGHT" "$WIDTH"
@@ -803,7 +803,7 @@ mkdir -p /mnt/root/.config/{nano,readline}
 #Make gnupg config folder. Required with custom XDG
 mkdir -p /mnt/etc/skel/.local/share/gnupg/
 chmod -R 700 /mnt/etc/skel/.local/share/gnupg
-#Move nanorc to user and root. Change root users to have a red title bar
+#Move nanorc to user and root. Change root edits to have a red title bar
 mv "$configFiles"/configs/nanorc /mnt/etc/skel/.config/nano/
 cp /mnt/etc/skel/.config/nano/nanorc /mnt/root/.config/nano/
 sed "s,set titlecolor bold\,lightwhite,set titlecolor bold\,red\,lightblack,g" -i /mnt/root/.config/nano/nanorc
@@ -845,7 +845,7 @@ arch-chroot /mnt useradd -m -G network,kvm,floppy,disk,storage,uucp,wheel,optica
 echo "$user":"$pass" | chpasswd -R /mnt
 #Set the root password
 echo "root":"$pass" | chpasswd -R /mnt
-#Unset and delete the passwords stored in pass1 pass2 pass and encpass encpass1 encpass2
+#Unset password variables to be extra safe
 unset pass1 pass2 pass encpass encpass1 encpass2
 #Setup stronger password security by increasing delay between password attempts to 5 seconds
 echo "auth optional pam_faildelay.so delay=5000000" >> /mnt/etc/pam.d/system-login
