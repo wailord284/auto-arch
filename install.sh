@@ -660,6 +660,11 @@ dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Enabling Services" \
 --prgbox "Enabling core system services" "arch-chroot /mnt systemctl enable plocate-updatedb.timer NetworkManager systemd-timesyncd ctrl-alt-del.target irqbalance earlyoom zramswap linux-modules-cleanup logrotate.timer fstrim.timer archlinux-keyring-wkd-sync.timer" "$HEIGHT" "$WIDTH"
 clear
+#Disable useless services like userdb which most people will never use
+dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
+--title "Disabling Unnecessary Services" \
+--prgbox "Disabling unnecessary services" "arch-chroot /mnt systemctl disable systemd-userdbd.socket systemd-userdbd.service" "$HEIGHT" "$WIDTH"
+clear
 #Enable performance services if RAM is over ~2GB
 ramTotal=$(grep MemTotal /proc/meminfo | grep -Eo '[0-9]*')
 if [ "$ramTotal" -gt "2020000" ]; then

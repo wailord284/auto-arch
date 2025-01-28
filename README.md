@@ -94,6 +94,7 @@ The user will now be prompted to supply basic information such as hostname, user
     * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
     * Systemd service timeout changed from 90 seconds to 45 seconds
     * [Disable coredump](https://wiki.archlinux.org/title/Core_dump#Using_systemd)
+    * Disable systemd-userdbd
 - Sudo changes:
     * [Prevent password timeout](https://wiki.archlinux.org/index.php/Sudo#Disable_password_prompt_timeout) when running long commands
     * [visudo editor](https://wiki.archlinux.org/index.php/Sudo#Using_visudo) changed from vi to nano
