@@ -1154,7 +1154,7 @@ echo "$green""2$reset - Enable X2Go remote desktop management server"
 echo "$green""3$reset - Enable sshd"
 echo "$green""4$reset - Enable and install the UFW firewall"
 echo "$green""5$reset - Use the iwd wifi backend over wpa_suplicant for NetworkManager"
-echo "$green""6$reset - Block ads system wide using hblock to modify the hosts file $green(recommended)"
+echo "$green""6$reset - Block ads system wide using hblock to modify the hosts file"
 echo "$green""7$reset - Encrypt and cache DNS requests with dns-over-https"
 echo "$green""8$reset - Enable needrestart to restart outdated services"
 echo "$green""9$reset - Install Lutris, Wine and Libraries for gaming"
@@ -1162,7 +1162,7 @@ echo "$green""9$reset - Install Lutris, Wine and Libraries for gaming"
 echo "$reset""Default options are:$green 6 $red q""$reset"
 echo "Enter$green 1-9$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
 read -r -p "Options: " selection
-selection=${selection:- 6 q}
+selection=${selection:- q}
 	for entry in $selection ; do
 
 	case "${entry[@]}" in
