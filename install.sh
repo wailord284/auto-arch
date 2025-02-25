@@ -780,6 +780,8 @@ sed "s,pack-relative-relocs,pack-relative-relocs -fuse-ld=mold,g" -i /mnt/etc/ma
 sed "s,T0,T0 --auto-threads=logical,g" -i /mnt/etc/makepkg.conf
 #Disable debug for faster builds
 sed "s,purge debug,purge \!debug,g" -i /mnt/etc/makepkg.conf
+#Disable docs for smaller builds
+sed "s,strip docs,strip \!docs,g" -i /mnt/etc/makepkg.conf
 
 
 ###USER CONFIG SETUP - /etc/skel###
