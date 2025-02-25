@@ -1,5 +1,5 @@
 [Unit]
-Description=Powertop tunings
+Description=Powertop auto-tune tunings
 
 [Service]
 Type=oneshot

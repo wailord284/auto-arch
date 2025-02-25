@@ -938,8 +938,6 @@ if acpi -V | grep -iq Battery ; then acpiBattery=yes; fi
 if [ -d "/sys/class/power_supply/BAT0" ] || [ -d "/sys/class/power_supply/BAT1" ]; then sysBattery=yes; fi
 chassisType=$(hostnamectl | grep "Chassis" | cut -d":" -f2 | cut -d" " -f2)
 if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery" = yes ] || [ "$sysBattery" = yes ]; then
-	#Move the powertop auto tune service so it can be enabled if the user wants. TLP does the same thing. Disable by default
-	mv "$configFiles"/configs/systemd/powertop.service /mnt/etc/systemd/system/
 	#Install power saving tools and enable tlp
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Laptop" \
@@ -1021,6 +1019,8 @@ mv "$configFiles"/configs/systemd/ttyinterfaces.service /mnt/etc/systemd/system/
 #Lower the logs from rtkit. Reduces the spam in journalctl
 mkdir -p /mnt/etc/systemd/system/rtkit-daemon.service.d
 mv "$configFiles"/configs/systemd/00-rtkit-loglevel.conf /mnt/etc/systemd/system/rtkit-daemon.service.d/
+#Add powertop auto-tune service. Disabled by default but can be useful on laptops and servers
+mv "$configFiles"/configs/systemd/powertop.service /mnt/etc/systemd/system/
 
 
 ###REFLECTOR###
@@ -1158,7 +1158,7 @@ echo "$green""5$reset - Use the iwd wifi backend over wpa_suplicant for NetworkM
 echo "$green""6$reset - Block ads system wide using hblock to modify the hosts file"
 echo "$green""7$reset - Encrypt and cache DNS requests with dns-over-https"
 echo "$green""8$reset - Enable needrestart to restart outdated services"
-echo "$green""9$reset - Install Lutris, Wine and Libraries for gaming"
+echo "$green""9$reset - Install Lutris, Wine and libraries for gaming"
 
 echo "Enter$green 1-9$reset (seperated by spaces for multiple options) or$red q$reset to$red quit$reset"
 read -r -p "Options: " selection
