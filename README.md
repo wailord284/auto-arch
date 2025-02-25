@@ -89,7 +89,7 @@ The user will now be prompted to supply basic information such as hostname, user
     * [Keep only 1024MB](https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit) of Journald logs and compress them
     * [Disable coredump](https://wiki.archlinux.org/title/Core_dump#Using_systemd)
     * Disable systemd-userdbd
-    * Systemd service timeout changed from 90 seconds to 45 seconds
+    * Systemd service timeout changed from 90 to 45 seconds
 - Sudo changes:
     * [Prevent password timeout](https://wiki.archlinux.org/index.php/Sudo#Disable_password_prompt_timeout) when running long commands
     * [visudo editor](https://wiki.archlinux.org/index.php/Sudo#Using_visudo) changed from vi to nano
@@ -106,9 +106,19 @@ The user will now be prompted to supply basic information such as hostname, user
     * [DNS Caching](https://wiki.archlinux.org/title/NetworkManager#DNS_caching_and_conditional_forwarding) and [DNSSEC](https://wiki.archlinux.org/title/NetworkManager#DNSSEC)
 - Optional Changes and Settings
     * [Disk encryption](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) for the root partition, enable [trim/discard](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)) if the device is an SSD and also disable [workqueue](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance) to increase performance
-    * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
     * [Disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) and [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+    * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
     * [Powertop](https://wiki.archlinux.org/title/Powertop#Apply_settings) systemd service disabled by default with --auto-tune
+- Optional post-install options
+    * Install [Bedrock Linux](https://bedrocklinux.org/)
+    * Enable [X2Go](https://wiki.archlinux.org/title/X2Go)
+    * Enable [SSHD](https://wiki.archlinux.org/title/OpenSSH#Daemon_management)
+    * Enable and install the [UFW firewall](https://wiki.archlinux.org/title/Uncomplicated_Firewall#Installation)
+    * Use [iwd](https://wiki.archlinux.org/title/NetworkManager#Using_iwd_as_the_Wi-Fi_backend) instead of wpa_supplicant for WiFi
+    * Blocks ad using [hBlock](https://github.com/hectorm/hblock)
+    * Setup DNS over HTTPS using [dns-over-https](https://wiki.archlinux.org/title/DNS-over-HTTPS)
+    * Enable [needrestart](https://github.com/liske/needrestart)
+    * Install [Lutris](https://wiki.archlinux.org/title/Gaming), Wine and required libraries
 
 # Things to consider when using this installer
 - NO automatic updates or GUI package manager. You are expected to update the system regularly!
