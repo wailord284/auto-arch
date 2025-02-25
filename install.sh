@@ -2,10 +2,8 @@
 ###ABOUT###
 #This script will autodetect a large range of hardware and should automatically configure many systems out of the box.
 #This script will install Arch with mainly vanilla settings plus some programs and features I personally use.
-#To install applications I like, I've created a custom software repository known as "Aurmageddon"
-##Aurmageddon has 1500+ packages that recieve frequent updates. Some software used in this install comes from this repo.
-##To view this repo, go to https://wailord284.club/repo/aurmageddon/x86_64/
-##This repo is unsigned but personally maintained by me.
+#To install applications I like, I've created a custom software repository known as "Aurmageddon".
+#This repo is unsigned but personally maintained by me.
 
 #Colors
 yellow=$(tput setaf 3)
@@ -510,9 +508,8 @@ clear
 
 
 ###PACMAN CONFIG###
-#Enable verbose output, parallel downloads and color in pacman.conf
+#Enable verbose output and color in pacman.conf
 sed "s,\#\VerbosePkgLists,VerbosePkgLists,g" -i /mnt/etc/pacman.conf
-sed "s,\#\ParallelDownloads = 5,ParallelDownloads = 4,g" -i /mnt/etc/pacman.conf
 sed "s,\#\Color,Color,g" -i /mnt/etc/pacman.conf
 
 
