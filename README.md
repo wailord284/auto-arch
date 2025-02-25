@@ -23,10 +23,6 @@ The user will now be prompted to supply basic information such as hostname, user
     * BTRFS snapshots with [Snapper](https://wiki.archlinux.org/title/Snapper) and [snap-pac](https://github.com/wesbarnett/snap-pac)
     * [Disable FSCK](https://wiki.archlinux.org/title/Improving_performance/Boot_process#Filesystem_mounts) mkinitcpio hook when using BTRFS
     * All filesystems will use an *atime (usually noatime) mount option
-- Optional setting to enable [disk encryption](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) for the root partition
-    * Supports [trim/discard](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)) if the device is an SSD
-    * Increase performance on SSDs by disabling [workqueue](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance)
-- Optional setting to [disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) and [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
 - Change mkinitcpio base and udev hooks to [systemd](https://wiki.archlinux.org/title/Improving_performance/Boot_process#Using_systemd_instead_of_busybox_on_early_init) to decrease boot time
 - GPG keyserver for Pacman changed to [keyserver.ubuntu.com](https://keyserver.ubuntu.com/)
 - Nano [syntax highlighting](https://github.com/scopatz/nanorc), line numbers and position log enabled
@@ -51,6 +47,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - [Reflector](https://wiki.archlinux.org/title/Reflector#systemd_timer) timer enabled to sort mirrors weekly
 - [Enforce Stronger SSH encryption](https://www.sshaudit.com/hardening_guides.html) - Configure .ssh/config to use strong ciphers by default
 - [5 second delay between password attempts](https://wiki.archlinux.org/title/Security#Enforce_a_delay_after_a_failed_login_attempt)
+- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~1000 packages
 - Changes if RAM is over 2GB
     * [Profile-sync-daemon](https://wiki.archlinux.org/index.php/Profile-sync-daemon) - Copy browser profiles into RAM and sync to disk ever 30 minutes
 - Firefox changes:
@@ -82,18 +79,17 @@ The user will now be prompted to supply basic information such as hostname, user
     * Update and reinstall grub hook after grub updates
     * Verbose Package changes, Color, Parallel downloads
 - Makepkg changes:
-    * Set makeflags to use all cores when compiling
     * Change -mtune=generic to [native](https://wiki.archlinux.org/index.php/Makepkg#Building_optimized_binaries)
     * Change RUSTFLAGS to build [native](https://wiki.archlinux.org/index.php/Makepkg#Building_optimized_binaries) binaries
     * Use [.tar](https://wiki.archlinux.org/index.php/Makepkg#Use_other_compression_algorithms) as default package extension (no compression) when building AUR packages
     * Use [mold](https://wiki.archlinux.org/title/Makepkg#Using_mold_linker) for linking
+    * Set makeflags to use all cores when compiling (MAKEFLAGS="-j$(nproc)")
 - Systemd changes:
     * [Journal log always visible](https://wiki.archlinux.org/index.php/Systemd/Journal#Forward_journald_to_/dev/tty12) on tty12 (control + alt + F12)
     * [Keep only 1024MB](https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit) of Journald logs and compress them
-    * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
-    * Systemd service timeout changed from 90 seconds to 45 seconds
     * [Disable coredump](https://wiki.archlinux.org/title/Core_dump#Using_systemd)
     * Disable systemd-userdbd
+    * Systemd service timeout changed from 90 seconds to 45 seconds
 - Sudo changes:
     * [Prevent password timeout](https://wiki.archlinux.org/index.php/Sudo#Disable_password_prompt_timeout) when running long commands
     * [visudo editor](https://wiki.archlinux.org/index.php/Sudo#Using_visudo) changed from vi to nano
@@ -108,8 +104,11 @@ The user will now be prompted to supply basic information such as hostname, user
     * [Faster default DNS servers](https://wiki.archlinux.org/index.php/NetworkManager#Setting_custom_global_DNS_servers) - [Cloudflare 1.1.1.1](https://1.1.1.1/)
     * [Disable systemd-resolve](https://wiki.archlinux.org/title/NetworkManager#Unit_dbus-org.freedesktop.resolve1.service_not_found) to remove "unit dbus-org.freedesktop.resolve1.service not found" in journal log
     * [DNS Caching](https://wiki.archlinux.org/title/NetworkManager#DNS_caching_and_conditional_forwarding) and [DNSSEC](https://wiki.archlinux.org/title/NetworkManager#DNSSEC)
-- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~1000 packages
-    * [View the public repository here](https://wailord284.club/repo/aurmageddon/x86_64/)
+- Optional Changes and Settings
+    * [Disk encryption](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) for the root partition, enable [trim/discard](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)) if the device is an SSD and also disable [workqueue](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance) to increase performance
+    * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
+    * [Disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) and [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+    * [Powertop](https://wiki.archlinux.org/title/Powertop#Apply_settings) systemd service disabled by default with --auto-tune
 
 # Things to consider when using this installer
 - NO automatic updates or GUI package manager. You are expected to update the system regularly!
