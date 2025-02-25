@@ -609,7 +609,6 @@ SigLevel = Never
 Server = https://mirrors.xtom.us/archlinuxcn/\$arch
 Server = https://mirrors.ocf.berkeley.edu/archlinuxcn/\$arch
 Server = https://repo.archlinuxcn.org/\$arch
-Server = https://cdn.repo.archlinuxcn.org/\$arch
 
 EOF
 #Add the Ubuntu keyserver to gpg. Also allow for SHA1 signatures
