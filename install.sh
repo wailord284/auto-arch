@@ -495,6 +495,7 @@ dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 sed '/mirror.lty.me/d' -i /etc/pacman.d/mirrorlist
 sed '/mirrors.kernel.org/d' -i /etc/pacman.d/mirrorlist
 sed '/octyl.net/d' -i /etc/pacman.d/mirrorlist
+sed '/cicku.me/d' -i /etc/pacman.d/mirrorlist
 sed '/arch.hu.fo/d' -i /etc/pacman.d/mirrorlist
 clear
 
@@ -547,7 +548,7 @@ sed "s,\#\COMPRESSION=\"lz4\",COMPRESSION=\"lz4\",g" -i /mnt/etc/mkinitcpio.conf
 #Enable max compression for LZ4 saving some extra space. LZ4 still decompresses the fastest
 sed "s,\#\COMPRESSION_OPTIONS=(),COMPRESSION_OPTIONS=(-9),g" -i /mnt/etc/mkinitcpio.conf
 #Enable module decompression
-sed "s,\#\MODULES_DECOMPRESS=\"yes\",MODULES_DECOMPRESS=\"yes\",g" -i /mnt/etc/mkinitcpio.conf
+sed "s,\#\MODULES_DECOMPRESS=\"no\",MODULES_DECOMPRESS=\"yes\",g" -i /mnt/etc/mkinitcpio.conf
 
 
 ###FSTAB###
