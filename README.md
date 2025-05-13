@@ -66,12 +66,12 @@ The user will now be prompted to supply basic information such as hostname, user
     * Add colored output to ls, ip, grep and file extensions
     * Custom aliases for trizen, pacman and other system tasks
 - Laptop changes (If detected):
-    * [Tackpad](https://github.com/wailord284/Arch-Linux-Installer/blob/master/configs/xorg/70-synaptics.conf) - More comfortable defaults
+    * [Tackpad](https://github.com/wailord284/auto-arch/blob/master/configs/xorg/70-synaptics.conf) - More comfortable defaults
     * [TLP](https://wiki.archlinux.org/title/TLP) - Default settings and PCIE_ASPM_ON_BAT=powersupersave
 - Grub changes:
     * [File Manager](https://github.com/a1ive/grub2-filemanager), Reboot and Shutdown - Available as additional grub menus
-    * [UEFI tools:](https://github.com/wailord284/Arch-Linux-Installer/tree/master/configs/grub/tools) [UEFI Shell](https://github.com/pbatard/UEFI-Shell), [Memtest86](https://memtest.org/)
-    * [UEFI games:](https://github.com/wailord284/Arch-Linux-Installer/tree/master/configs/grub/games) [Tetris](https://github.com/a1ive/uefi-tetris/), [Flappybird](https://github.com/hymen81/UEFI-Game-FlappyBirdy)
+    * [UEFI tools:](https://github.com/wailord284/auto-arch/tree/master/configs/grub/tools) [UEFI Shell](https://github.com/pbatard/UEFI-Shell), [Memtest86](https://memtest.org/)
+    * [UEFI games:](https://github.com/wailord284/auto-arch/tree/master/configs/grub/games) [Tetris](https://github.com/a1ive/uefi-tetris/), [Flappybird](https://github.com/hymen81/UEFI-Game-FlappyBirdy)
     * Arch Linux [theme](https://github.com/fghibellini/arch-silence)
 - Pacman changes:
     * [Kernel Modules hook](https://github.com/saber-nyan/kernel-modules-hook) - Restore functionality when the running kernel updates
