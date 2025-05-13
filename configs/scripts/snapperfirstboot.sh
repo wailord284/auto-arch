@@ -4,7 +4,7 @@
 #In order to setup our snapshots correctly, we make a one time boot script
 #Create our snapper config
 snapper -c root create-config /
-#Change snapper backups to keep to 8
+#Change snapper backups to keep to 10
 sed "s,NUMBER_LIMIT=\"50\",NUMBER_LIMIT=\"10\",g" -i /etc/snapper/configs/root
 sed "s,NUMBER_LIMIT_IMPORTANT=\"10\",NUMBER_LIMIT_IMPORTANT=\"5\",g" -i /etc/snapper/configs/root
 #Disable all timeline snapshots
