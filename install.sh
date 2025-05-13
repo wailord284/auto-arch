@@ -183,7 +183,7 @@ clear
 
 ###REFLECTOR REGION###
 unset COUNT MENU_OPTIONS options
-for i in $(reflector --list-countries | sed '1,2d' | cut -c26-28); do
+for i in $(reflector --list-countries | cut -c24-26 | tail -n +3 | sed 's/^ *//'); do
 	COUNT=$((COUNT+1))
 	MENU_OPTIONS="${MENU_OPTIONS} $i ${COUNT} off"
 done
