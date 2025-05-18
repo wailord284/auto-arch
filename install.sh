@@ -662,9 +662,9 @@ dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Disabling Unnecessary Services" \
 --prgbox "Disabling unnecessary services" "arch-chroot /mnt systemctl disable systemd-userdbd.socket systemd-userdbd.service" "$HEIGHT" "$WIDTH"
 clear
-#Enable performance services if RAM is over ~2GB
+#Enable performance services if RAM is over ~4GB
 ramTotal=$(grep MemTotal /proc/meminfo | grep -Eo '[0-9]*')
-if [ "$ramTotal" -gt "2020000" ]; then
+if [ "$ramTotal" -gt "4100000" ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Enabling Performance Services" \
 	--prgbox "Enabling profile-sync-daemon" "arch-chroot /mnt systemctl --global enable psd.service && arch-chroot /mnt systemctl enable asd.service" "$HEIGHT" "$WIDTH"
