@@ -49,7 +49,8 @@ The user will now be prompted to supply basic information such as hostname, user
 - [5 second delay between password attempts](https://wiki.archlinux.org/title/Security#Enforce_a_delay_after_a_failed_login_attempt)
 - [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~1000 packages
 - Changes if RAM is over 2GB
-    * [Profile-sync-daemon](https://wiki.archlinux.org/index.php/Profile-sync-daemon) - Copy browser profiles into RAM and sync to disk ever 30 minutes
+    * [Profile-sync-daemon](https://wiki.archlinux.org/index.php/Profile-sync-daemon) - Copy Firefox profile into RAM and sync to disk every 15 minutes
+    * [Anything-sync-daemon](https://wiki.archlinux.org/title/Anything-sync-daemon) - Copy Firefox cache and libraries into RAM and sync to disk every 15 minutes
 - Firefox changes:
     * [Ublock Origin](https://ublockorigin.com/) - Ad blocker
     * [LocalCDN](https://www.localcdn.org/) - Local emulation of Content Delivery Networks
@@ -126,7 +127,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Third party repositories enabled by default (archlinuxcn, chaotic-aur, aurmageddon)
 - A significant amount of changes that may or may not align with the Arch Wiki or its suggestions
 - Some aspects are optimized for performance/convenience over security
-    * If your system has 2GB+ of RAM, additional utilities will be installed which will use additional RAM to increase performance
+    * If your system has 4GB+ of RAM, additional utilities will be installed which will use additional RAM to increase performance
 - Proprietary NVidia drivers are not configured. Only xf86-video-nouveau is installed
 - Some of the UEFI tools will only work on systems with a newer UEFI implementation
 
