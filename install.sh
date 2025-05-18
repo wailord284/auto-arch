@@ -797,6 +797,7 @@ mkdir -p /mnt/etc/skel/.config/systemd/user/psd-resync.timer.d/
 mkdir -p /mnt/etc/skel/.local/share/
 mkdir -p /mnt/etc/skel/.local/state/
 mkdir -p /mnt/etc/skel/{.mozilla,.ssh}
+mkdir -p /mnt/etc/skel/.cache/mozilla/firefox/
 #Create root user config directories
 mkdir -p /mnt/root/.config/{nano,readline}
 #Make gnupg config folder. Required with custom XDG
