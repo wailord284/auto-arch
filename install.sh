@@ -772,7 +772,7 @@ sed "s,\#\MAKEFLAGS=\"-j2\",MAKEFLAGS=\"-j\$(nproc)\",g" -i /mnt/etc/makepkg.con
 #Build all packages with native optimizations
 sed "s,-march=x86-64 -mtune=generic,-march=native,g" -i /mnt/etc/makepkg.conf
 #Build all rust packages with native optimizations and use the mold linker
-sed "s,RUSTFLAGS=\"-Cforce-frame-pointers=yes\",RUSTFLAGS=\"-C opt-level=3 -Cforce-frame-pointers=yes -C target-cpu=native -C link-arg=-fuse-ld=mold\",g" -i /mnt/etc/makepkg.conf.d/rust.conf
+sed "s,RUSTFLAGS=\"-C force-frame-pointers=yes\",RUSTFLAGS=\"-C opt-level=3 -C force-frame-pointers=yes -C target-cpu=native -C link-arg=-fuse-ld=mold\",g" -i /mnt/etc/makepkg.conf.d/rust.conf
 #Change default package extension to just tar (uncompressed)
 sed "s,PKGEXT='.pkg.tar.zst',PKGEXT='.pkg.tar',g" -i /mnt/etc/makepkg.conf
 #Use mold linker. Append to end of LDFLAGS
