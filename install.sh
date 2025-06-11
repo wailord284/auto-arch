@@ -1002,7 +1002,7 @@ echo 'tcp_bbr' > /mnt/etc/modules-load.d/tcp_bbr.conf
 ###LY - DISPLAY MANAGER###
 #Configure ly to animate and show more info
 sed "s,animation = none,animation = doom,g" -i /mnt/etc/ly/config.ini
-sed "s,bigclock = false,bigclock = true,g" -i /mnt/etc/ly/config.ini
+sed "s,bigclock = none,bigclock = en,g" -i /mnt/etc/ly/config.ini
 #Enabel ly
 arch-chroot /mnt systemctl enable ly.service > /dev/null 2>&1
 
