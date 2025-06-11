@@ -442,7 +442,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	elif [ "$filesystem" = bcachefs ] ; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 		--title "Partitioning Disk" \
-		--prgbox "Formatting root partition" "bcachefs format -f -L ArchRoot --discard --compression=zstd --background_compression=zstd $rootTargetDisk" "$HEIGHT" "$WIDTH"
+		--prgbox "Formatting root partition" "bcachefs format -f -L ArchRoot --discard --compression=zstd:3 $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	fi
 
 	if [ "$filesystem" = btrfs ] ; then
