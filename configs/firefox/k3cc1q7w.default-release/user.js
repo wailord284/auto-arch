@@ -49,12 +49,13 @@ user_pref("experiments.manifest.uri", "");
 user_pref("experiments.supported", false);
 user_pref("extensions.getAddons.cache.enabled", false);
 user_pref("extensions.getAddons.showPane", false);
+user_pref("extensions.greasemonkey.stats.optedin", false);
+user_pref("extensions.greasemonkey.stats.url", "");
 user_pref("extensions.pocket.enabled", false);
 user_pref("extensions.shield-recipe-client.api_url", "");
 user_pref("extensions.shield-recipe-client.enabled", false);
 user_pref("extensions.webservice.discoverURL", "");
-user_pref("media.autoplay.default", 0);
-user_pref("media.autoplay.enabled", true);
+user_pref("media.autoplay.default", 2);
 user_pref("media.eme.enabled", false);
 user_pref("media.gmp-widevinecdm.enabled", false);
 user_pref("media.navigator.enabled", false);
@@ -94,6 +95,7 @@ user_pref("toolkit.telemetry.updatePing.enabled", false);
 user_pref("webgl.disabled", true);
 user_pref("webgl.renderer-string-override", " ");
 user_pref("webgl.vendor-string-override", " ");
+
 
 //From Betterfox
 //###Fastfox###
@@ -163,7 +165,7 @@ user_pref("privacy.userContext.ui.enabled", true);
 //###Smoothfox##
 //Improve scrolling
 user_pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
-user_pref("mousewheel.min_line_scroll_amount", 10); // 10-40; adjust this number to your liking; default=5
+user_pref("mousewheel.min_line_scroll_amount", 20); // 10-40; adjust this number to your liking; default=5
 user_pref("general.smoothScroll.mouseWheel.durationMinMS", 80); // default=50
 user_pref("general.smoothScroll.currentVelocityWeighting", "0.15"); // default=.25
 user_pref("general.smoothScroll.stopDecelerationWeighting", "0.6"); // default=.4
