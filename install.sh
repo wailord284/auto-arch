@@ -1067,8 +1067,8 @@ driftfile /var/lib/chrony/drift
 ntsdumpdir /var/lib/chrony
 leapseclist /usr/share/zoneinfo/leap-seconds.list
 EOF
-#Have NetworkManager inform Chrony of on/offline status for laptops
-ln -s /mnt/usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline /mnt/etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh > /dev/null 2>&1
+#Have NetworkManager inform Chrony of on/offline status for laptops.
+arch-chroot /mnt ln -s /usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline /etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh > /dev/null 2>&1
 chmod +x /mnt/usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline
 clear
 
