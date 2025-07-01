@@ -252,7 +252,7 @@ fi
 
 ###FILESYSTEM###
 unset COUNT MENU_OPTIONS options
-for i in $(echo "ext4 xfs btrfs bcachefs f2fs"); do
+for i in $(echo "ext4 xfs btrfs f2fs"); do
 	COUNT=$((COUNT+1))
 	MENU_OPTIONS="${MENU_OPTIONS} $i ${COUNT} off"
 done
@@ -439,10 +439,6 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 		--title "Partitioning Disk" \
 		--prgbox "Formatting root partition" "mkfs.btrfs --features block-group-tree -f -L ArchRoot $rootTargetDisk" "$HEIGHT" "$WIDTH"
-	elif [ "$filesystem" = bcachefs ] ; then
-		dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
-		--title "Partitioning Disk" \
-		--prgbox "Formatting root partition" "bcachefs format -f -L ArchRoot --discard --compression=zstd:3 $rootTargetDisk" "$HEIGHT" "$WIDTH"
 	fi
 
 	if [ "$filesystem" = btrfs ] ; then
@@ -469,9 +465,6 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	elif [ "$filesystem" = f2fs ] ; then
 		#Mount F2FS root partition
 		mount -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime "$rootTargetDisk" /mnt
-	elif [ "$filesystem" = bcachefs ] ; then
-		#Mount bcachefs root partition. Supress weird mount requests for other partitions
-		mount -t bcachefs -o discard,noatime "$rootTargetDisk" /mnt > /dev/null 2>&1
 	else
 		#Standard mount for everything else
 		mount -o noatime "$rootTargetDisk" /mnt
@@ -628,7 +621,7 @@ clear
 #Install desktop and software
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing desktop software" \
---prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-taskmanager xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart irqbalance xf86-video-fbdev xf86-video-amdgpu xf86-video-ati xf86-video-nouveau vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate gtk-engine-murrine mesa-utils xorg-xkill bcachefs-tools f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-libav gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-taskmanager xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart irqbalance xf86-video-fbdev xf86-video-amdgpu xf86-video-ati xf86-video-nouveau vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate gtk-engine-murrine mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-libav gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
