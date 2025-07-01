@@ -444,7 +444,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	if [ "$filesystem" = btrfs ] ; then
 		rootTargetDiskUUID=$(blkid | grep "$rootTargetDisk" | cut -d" " -f3 | cut -d'"' -f2)
 		#Mount the root partition by UUID to make sure genfstab uses UUIDs
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag -U "$rootTargetDiskUUID" /mnt
+		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag -U "$rootTargetDiskUUID" /mnt
 		#Create the subvolumes. Snapper config creation will create the .snapshot subvolume on first boot
 		btrfs subvolume create /mnt/@
 		btrfs subvolume create /mnt/@var_log
@@ -458,10 +458,10 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		#Make the subvolume directories to mount
 		mkdir -p /mnt/{srv,var/log,var/cache,var/tmp}
 		#Mount the remaining subvoulmes
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@var_log -U "$rootTargetDiskUUID" /mnt/var/log
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@var_cache -U "$rootTargetDiskUUID" /mnt/var/cache
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@var_tmp -U "$rootTargetDiskUUID" /mnt/var/tmp
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@srv -U "$rootTargetDiskUUID" /mnt/srv
+		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_log -U "$rootTargetDiskUUID" /mnt/var/log
+		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_cache -U "$rootTargetDiskUUID" /mnt/var/cache
+		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_tmp -U "$rootTargetDiskUUID" /mnt/var/tmp
+		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@srv -U "$rootTargetDiskUUID" /mnt/srv
 	elif [ "$filesystem" = f2fs ] ; then
 		#Mount F2FS root partition
 		mount -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime "$rootTargetDisk" /mnt
