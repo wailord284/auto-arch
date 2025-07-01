@@ -655,7 +655,7 @@ clear
 #Enable services
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Enabling Services" \
---prgbox "Enabling core system services" "arch-chroot /mnt systemctl enable plocate-updatedb.timer NetworkManager systemd-timesyncd ctrl-alt-del.target irqbalance earlyoom zramswap linux-modules-cleanup logrotate.timer fstrim.timer archlinux-keyring-wkd-sync.timer" "$HEIGHT" "$WIDTH"
+--prgbox "Enabling core system services" "arch-chroot /mnt systemctl enable plocate-updatedb.timer NetworkManager chronyd ctrl-alt-del.target irqbalance earlyoom zramswap linux-modules-cleanup logrotate.timer fstrim.timer archlinux-keyring-wkd-sync.timer" "$HEIGHT" "$WIDTH"
 clear
 #Disable useless services like userdb which most people will never use
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
@@ -1048,6 +1048,36 @@ cat << EOF > /mnt/etc/xdg/reflector/reflector.conf
 EOF
 #Enable the weekly reflector timer
 arch-chroot /mnt systemctl enable reflector.timer > /dev/null 2>&1
+
+
+###TIME - CHRONY###
+#Setup Chrony for time syncing. Better for laptops
+cat << EOF > /mnt/etc/chrony.conf
+#NTS Servers - https://github.com/jauderho/nts-servers
+server time.cloudflare.com nts iburst maxsources 4 offline
+server ohio.time.system76.com nts iburst maxsources 4 offline
+server oregon.time.system76.com nts iburst maxsources 4 offline
+server virginia.time.system76.com nts iburst maxsources 4 offline
+
+#Misc time correction options
+maxupdateskew 100
+minsources 2
+maxdrift 100
+makestep 1.0 3
+
+#RTC Sync - Set UTC time
+rtconutc
+rtcsync
+
+#Paths
+driftfile /var/lib/chrony/drift
+ntsdumpdir /var/lib/chrony
+leapseclist /usr/share/zoneinfo/leap-seconds.list
+EOF
+#Have NetworkManager inform Chrony of on/offline status for laptops
+ln -s /mnt/usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline /mnt/etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh > /dev/null 2>&1
+chmod +x /mnt/usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline
+clear
 
 
 ###SYSCTL RULES###

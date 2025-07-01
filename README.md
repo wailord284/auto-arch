@@ -42,7 +42,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - [Modified IO Schedulers](https://wiki.archlinux.org/index.php/Improving_performance#Changing_I/O_scheduler) for hard drives, SATA SSDs and NVME drives
 - [Spindown hard drives after 20 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
 - [b43-firmware](https://wireless.wiki.kernel.org/en/users/drivers/b43/firmware) and [sof-firmware](https://github.com/thesofproject/sof-bin/) installed if required
-- [Systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd) for system time
+- [Chrony](https://wiki.archlinux.org/title/Chrony) for system time using [NTS](https://docs.ntpsec.org/latest/NTS-QuickStart.html) servers
 - [IRQBalance](https://irqbalance.github.io/irqbalance/) to better balance system latency and throughput on multi-core systems
 - [Reflector](https://wiki.archlinux.org/title/Reflector#systemd_timer) timer enabled to sort mirrors weekly
 - [Enforce Stronger SSH encryption](https://www.sshaudit.com/hardening_guides.html) - Configure .ssh/config to use strong ciphers by default
