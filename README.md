@@ -41,13 +41,12 @@ The user will now be prompted to supply basic information such as hostname, user
 - [Modified IO Schedulers](https://wiki.archlinux.org/index.php/Improving_performance#Changing_I/O_scheduler) for hard drives, SATA SSDs and NVME drives
 - [Spindown hard drives after 20 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
 - [b43-firmware](https://wireless.wiki.kernel.org/en/users/drivers/b43/firmware) and [sof-firmware](https://github.com/thesofproject/sof-bin/) installed if required
-- [Chrony](https://wiki.archlinux.org/title/Chrony) for system time using [NTS](https://docs.ntpsec.org/latest/NTS-QuickStart.html) servers
-- [IRQBalance](https://irqbalance.github.io/irqbalance/) to better balance system latency and throughput on multi-core systems
+- [Chrony](https://wiki.archlinux.org/title/Chrony) for system time using [NTS](https://docs.ntpsec.org/latest/NTS-QuickStart.html)
 - [Reflector](https://wiki.archlinux.org/title/Reflector#systemd_timer) timer enabled to sort mirrors weekly
 - [Enforce Stronger SSH encryption](https://www.sshaudit.com/hardening_guides.html) - Configure .ssh/config to use strong ciphers by default
 - [5 second delay between password attempts](https://wiki.archlinux.org/title/Security#Enforce_a_delay_after_a_failed_login_attempt)
 - [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~800 packages
-- Changes if RAM is over 2GB
+- Changes if RAM is over 4GB
     * [Profile-sync-daemon](https://wiki.archlinux.org/index.php/Profile-sync-daemon) - Copy Firefox profile into RAM and sync to disk every 15 minutes
     * [Anything-sync-daemon](https://wiki.archlinux.org/title/Anything-sync-daemon) - Copy Firefox cache into RAM and sync to disk every 15 minutes
 - Firefox changes:
