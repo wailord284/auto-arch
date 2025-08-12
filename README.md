@@ -33,7 +33,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Automatic log rotation with [logrotate](https://wiki.archlinux.org/title/Logrotate)
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
 - [lz4 mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION) to decrease boot times
-- [ly](https://github.com/fairyglade/ly) display manager
+- [ly](https://codeberg.org/fairyglade/ly) display manager
 - [Archlinuxcn](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#archlinuxcn) and [chaotic-aur](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#chaotic-aur) repositories for additional software
 - [Earlyoom](https://github.com/rfjakob/earlyoom) daemon to trigger the Linux OOM killer sooner
 - [FSTrim timer](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM) to trim all SSDs weekly
