@@ -1167,7 +1167,7 @@ mkdir -p /mnt/boot/EFI/games
 mv "$configFiles"/configs/grub/tools/* /mnt/boot/EFI/tools/
 mv "$configFiles"/configs/grub/games/*.efi /mnt/boot/EFI/games/
 #Copy UEFI shell for first time - done by pacman hook in future
-cp /usr/share/edk2-shell/x64/Shell.efi /mnt/boot/EFI/tools/shellx64.efi
+cp /mnt/usr/share/edk2-shell/x64/Shell.efi /mnt/boot/EFI/tools/shellx64.efi
 #Add custom menus
 mv "$configFiles"/configs/grub/custom.cfg /mnt/boot/grub/
 #Generate grubcfg
