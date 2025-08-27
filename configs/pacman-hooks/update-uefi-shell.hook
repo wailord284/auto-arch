@@ -1,0 +1,12 @@
+#https://www.reddit.com/r/archlinux/comments/1mvh57x/share_your_custom_pacman_hooks/
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Type=Package
+Target=edk2-shell
+
+[Action]
+Description=Updating UEFI shell for GRUB
+When=PostTransaction
+NeedsTargets
+Exec=/usr/bin/cp /usr/share/edk2-shell/x64/Shell.efi /boot/EFI/tools/shellx64.efi
