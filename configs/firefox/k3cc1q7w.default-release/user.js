@@ -130,6 +130,11 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", fa
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.aboutwelcome.enabled", false);
+//Disable AI
+user_pref("browser.ml.enable", false);
+user_pref("browser.ml.chat.enabled", false);
+user_pref("browser.ml.linkPreview.enabled", false);
+user_pref("browser.tabs.groups.smart.enabled", false);
 //Profile switcher
 user_pref("browser.profiles.enabled", true);
 //Use GTK bar
@@ -144,6 +149,10 @@ user_pref("browser.download.manager.addToRecentDocs", false);
 //Open PDFs inline
 user_pref("browser.download.open_pdf_attachments_inline", true);
 //###Securefox
+//Tracking Allowlist and Strict mode
+user_pref("browser.contentblocking.category", "strict")
+user_pref("privacy.trackingprotection.allow_list.baseline.enabled", true);
+user_pref("privacy.trackingprotection.allow_list.convenience.enabled", true);
 //Delete temp files for downloads
 user_pref("browser.download.start_downloads_in_tmp_dir", true);
 user_pref("browser.helperApps.deleteTempFileOnExit", true);
