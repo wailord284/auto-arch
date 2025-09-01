@@ -913,7 +913,6 @@ mv "$configFiles"/configs/scripts/* /mnt/opt/scripts/
 
 
 ###PACMAN HOOKS###
-#Add the grub reinstall pacman hook
 mkdir -p /mnt/etc/pacman.d/hooks/
 mv "$configFiles"/configs/pacman-hooks/update-grub.hook /mnt/etc/pacman.d/hooks/
 mv "$configFiles"/configs/pacman-hooks/clean-pacman-cache.hook /mnt/etc/pacman.d/hooks/
@@ -1104,7 +1103,7 @@ if [ "$boot" = efi ]; then
 	#Install memtest86 for UEFI
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 		--title "Memtest86" \
-		--prgbox "Installing UEFI Tools" "arch-chroot /mnt pacman -S memtest86+-efi edk2-shell --noconfirm" "$HEIGHT" "$WIDTH"
+		--prgbox "Installing UEFI Tools" "arch-chroot /mnt pacman -S memtest86+-efi edk2-shell --noconfirm && cp /mnt/usr/share/edk2-shell/x64/Shell.efi /mnt/boot/EFI/tools/shellx64.efi" "$HEIGHT" "$WIDTH"
 fi
 if [ "$boot" = bios ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
