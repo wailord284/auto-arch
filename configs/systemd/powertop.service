@@ -5,7 +5,7 @@ Description=Powertop auto-tune tunings
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/bin/powertop --auto-tune
-ExecStartPost=/bin/sh -c 'for f in $(grep -l "Mouse" /sys/bus/usb/devices/*/product | sed "s/product/power\\/control/"); do echo on >| "$f"; done'
+ExecStartPost=/bin/sh -c 'for f in $(find /sys/bus/usb/drivers/usbhid -regex '.*\/[0-9:.-]+' -printf '%f\n' | cut -d ":" -f 1 | sort -u); do echo on >| "/sys/bus/usb/devices/$f/power/control"; done'
 #ExecStart=/bin/bash -c "/usr/bin/echo on > /sys/bus/usb/devices/1-4.3/power/control"
 
 [Install]
