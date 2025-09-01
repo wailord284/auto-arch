@@ -99,27 +99,10 @@ user_pref("webgl.vendor-string-override", " ");
 
 //From Betterfox
 //###Fastfox###
-//GPU Accelerated Canvas
-user_pref("gfx.canvas.accelerated.cache-size", 512); // default=256; alt=1024
-user_pref("gfx.content.skia-font-cache-size", 20); // default=5; Chrome=20
 //VA-API
 user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("layers.mlgpu.enabled", true);
 user_pref("layers.gpu-process.enabled", true);
-//Media memory cache
-user_pref("media.memory_cache_max_size", 65536); // default=8192; AF=65536; alt=131072
-//Video buffering
-user_pref("media.cache_readahead_limit", 7200); // 120 min; default=60; stop reading ahead when our buffered data is this many seconds ahead of the current playback
-user_pref("media.cache_resume_threshold", 3600); // 60 min; default=30; when a network connection is suspended, don't resume it until the amount of buffered data falls below this threshold
-//Image cache
-user_pref("image.mem.decode_bytes_at_a_time", 32768); // default=16384; alt=65536; chunk size for calls to the image decoders
-//HTTP connections
-user_pref("network.http.max-connections", 1800); // default=900
-user_pref("network.http.max-persistent-connections-per-server", 10); // default=6; download connections; anything above 10 is excessive
-user_pref("network.http.max-urgent-start-excessive-connections-per-host", 5); // default=3
-//Prefetching
-user_pref("network.predictor.enabled", true);
-user_pref("network.prefetch-next", true);
 //###Peskyfox###
 //Disable recommendations
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
@@ -172,8 +155,8 @@ user_pref("network.http.referer.XOriginTrimmingPolicy", 2);
 user_pref("privacy.userContext.ui.enabled", true);
 //###Smoothfox##
 //Improve scrolling
-user_pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
-user_pref("mousewheel.min_line_scroll_amount", 20); // 10-40; adjust this number to your liking; default=5
-user_pref("general.smoothScroll.mouseWheel.durationMinMS", 80); // default=50
-user_pref("general.smoothScroll.currentVelocityWeighting", "0.15"); // default=.25
-user_pref("general.smoothScroll.stopDecelerationWeighting", "0.6"); // default=.4
+//user_pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
+//user_pref("mousewheel.min_line_scroll_amount", 20); // 10-40; adjust this number to your liking; default=5
+//user_pref("general.smoothScroll.mouseWheel.durationMinMS", 80); // default=50
+//user_pref("general.smoothScroll.currentVelocityWeighting", "0.15"); // default=.25
+//user_pref("general.smoothScroll.stopDecelerationWeighting", "0.6"); // default=.4
