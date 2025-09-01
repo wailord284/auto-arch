@@ -149,8 +149,7 @@ user_pref("browser.download.manager.addToRecentDocs", false);
 //Open PDFs inline
 user_pref("browser.download.open_pdf_attachments_inline", true);
 //###Securefox
-//Tracking Allowlist and Strict mode
-user_pref("browser.contentblocking.category", "strict")
+//Tracking Allowlist
 user_pref("privacy.trackingprotection.allow_list.baseline.enabled", true);
 user_pref("privacy.trackingprotection.allow_list.convenience.enabled", true);
 //Delete temp files for downloads
