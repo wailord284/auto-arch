@@ -103,6 +103,13 @@ user_pref("webgl.vendor-string-override", " ");
 user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("layers.mlgpu.enabled", true);
 user_pref("layers.gpu-process.enabled", true);
+//Network
+user_pref("network.http.max-connections", 1800);
+user_pref("network.http.max-persistent-connections-per-server", 10);
+user_pref("network.http.max-urgent-start-excessive-connections-per-host", 5);
+user_pref("network.http.pacing.requests.enabled", false);
+user_pref("network.dnsCacheExpiration", 3600);
+user_pref("network.ssl_tokens_cache_capacity", 10240);
 //###Peskyfox###
 //Disable recommendations
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
@@ -113,13 +120,12 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", fa
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.aboutwelcome.enabled", false);
+user_pref("browser.download.manager.addToRecentDocs", false);
 //Disable AI
 user_pref("browser.ml.enable", false);
 user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.ml.linkPreview.enabled", false);
 user_pref("browser.tabs.groups.smart.enabled", false);
-//Profile switcher
-user_pref("browser.profiles.enabled", true);
 //Use GTK bar
 user_pref("widget.gtk.non-native-titlebar-buttons.enabled", true);
 //Dark theme
@@ -151,12 +157,3 @@ user_pref("security.insecure_connection_text.pbmode.enabled", true);
 user_pref("browser.formfill.enable", false);
 //Limit cross origin information
 user_pref("network.http.referer.XOriginTrimmingPolicy", 2);
-//Enable containters
-user_pref("privacy.userContext.ui.enabled", true);
-//###Smoothfox##
-//Improve scrolling
-//user_pref("apz.overscroll.enabled", true); // DEFAULT NON-LINUX
-//user_pref("mousewheel.min_line_scroll_amount", 20); // 10-40; adjust this number to your liking; default=5
-//user_pref("general.smoothScroll.mouseWheel.durationMinMS", 80); // default=50
-//user_pref("general.smoothScroll.currentVelocityWeighting", "0.15"); // default=.25
-//user_pref("general.smoothScroll.stopDecelerationWeighting", "0.6"); // default=.4
