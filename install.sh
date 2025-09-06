@@ -462,6 +462,8 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_cache -U "$rootTargetDiskUUID" /mnt/var/cache
 		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_tmp -U "$rootTargetDiskUUID" /mnt/var/tmp
 		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@srv -U "$rootTargetDiskUUID" /mnt/srv
+		#Disable CoW for /var - potential performance increase: https://github.com/sabi-31/Modern_Arch_Linux_Install
+		chattr +C /mnt/var/tmp /mnt/var/log /mnt/var/cache
 	elif [ "$filesystem" = f2fs ] ; then
 		#Mount F2FS root partition
 		mount -o compress_algorithm=zstd:6,compress_chksum,atgc,gc_merge,lazytime "$rootTargetDisk" /mnt
