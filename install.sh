@@ -444,7 +444,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	if [ "$filesystem" = btrfs ] ; then
 		rootTargetDiskUUID=$(blkid | grep "$rootTargetDisk" | cut -d" " -f3 | cut -d'"' -f2)
 		#Mount the root partition by UUID to make sure genfstab uses UUIDs
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag -U "$rootTargetDiskUUID" /mnt
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag -U "$rootTargetDiskUUID" /mnt
 		#Create the subvolumes. Snapper config creation will create the .snapshot subvolume on first boot
 		btrfs subvolume create /mnt/@
 		btrfs subvolume create /mnt/@var_log
@@ -454,14 +454,14 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		#Unmount the root partition
 		umount /mnt
 		#Remount everything using subvolumes
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@ -U "$rootTargetDiskUUID" /mnt
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=60,noautodefrag,subvol=@ -U "$rootTargetDiskUUID" /mnt
 		#Make the subvolume directories to mount
 		mkdir -p /mnt/{srv,var/log,var/cache,var/tmp}
 		#Mount the remaining subvoulmes
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_log -U "$rootTargetDiskUUID" /mnt/var/log
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_cache -U "$rootTargetDiskUUID" /mnt/var/cache
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_tmp -U "$rootTargetDiskUUID" /mnt/var/tmp
-		mount -o noatime,compress-force=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@srv -U "$rootTargetDiskUUID" /mnt/srv
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_log -U "$rootTargetDiskUUID" /mnt/var/log
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_cache -U "$rootTargetDiskUUID" /mnt/var/cache
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@var_tmp -U "$rootTargetDiskUUID" /mnt/var/tmp
+		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag,subvol=@srv -U "$rootTargetDiskUUID" /mnt/srv
 		#Disable CoW for /var - potential performance increase: https://github.com/sabi-31/Modern_Arch_Linux_Install
 		chattr +C /mnt/var/tmp /mnt/var/log /mnt/var/cache
 	elif [ "$filesystem" = f2fs ] ; then
@@ -623,7 +623,7 @@ clear
 #Install desktop and software
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing desktop software" \
---prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-taskmanager xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart xf86-video-fbdev xf86-video-amdgpu xf86-video-ati xf86-video-nouveau vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate gtk-engine-murrine mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-libav gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-taskmanager xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart xf86-video-fbdev xf86-video-amdgpu xf86-video-ati xf86-video-nouveau vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate gtk-engine-murrine mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-libav gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
@@ -674,7 +674,7 @@ clear
 if lshw -class display | grep "Advanced Micro Devices" || dmesg | grep amdgpu > /dev/null 2>&1 ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "AMD Hardware" \
-	--prgbox "Found AMD Graphics card" "arch-chroot /mnt pacman -S lact opencl-mesa vulkan-mesa-layers vulkan-radeon nvtop --noconfirm" "$HEIGHT" "$WIDTH"
+	--prgbox "Found AMD Graphics card" "arch-chroot /mnt pacman -S lact opencl-mesa vulkan-mesa-layers vulkan-radeon --noconfirm" "$HEIGHT" "$WIDTH"
 fi
 if lshw -class display | grep "Intel Corporation" || dmesg | grep "i915" > /dev/null 2>&1 ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
