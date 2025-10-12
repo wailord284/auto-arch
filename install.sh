@@ -395,11 +395,11 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 		parted -s "$storage" mklabel gpt
 	fi
 	#Create fat32 boot partition
-	parted -a optimal -s "$storage" mkpart primary fat32 1MiB 1024MiB
+	parted -a optimal -s "$storage" mkpart primary fat32 1MiB 2048MiB
 	#Mark partition 1 as bootable
 	parted -s "$storage" set 1 boot on
 	#Create root partition
-	parted -a optimal -s "$storage" mkpart primary 1024MiB 100%
+	parted -a optimal -s "$storage" mkpart primary 2048MiB 100%
 	clear
 
 	#Format partitions for encryption
@@ -444,7 +444,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	if [ "$filesystem" = btrfs ] ; then
 		rootTargetDiskUUID=$(blkid | grep "$rootTargetDisk" | cut -d" " -f3 | cut -d'"' -f2)
 		#Mount the root partition by UUID to make sure genfstab uses UUIDs
-		mount -o noatime,compress=zstd:3,space_cache=v2,commit=90,noautodefrag -U "$rootTargetDiskUUID" /mnt
+		mount -o noatime,compress=zstd:3,space_cache=v2,noautodefrag -U "$rootTargetDiskUUID" /mnt
 		#Create the subvolumes. Snapper config creation will create the .snapshot subvolume on first boot
 		btrfs subvolume create /mnt/@
 		btrfs subvolume create /mnt/@var_log
