@@ -565,6 +565,7 @@ dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 #Set language
 lang=$(echo "$locale" | cut -d ' ' -f 1)
 echo "LANG=$lang" >> /mnt/etc/locale.conf
+echo "LC_COLLATE=C.UTF-8" >> /mnt/etc/locale.conf
 clear
 
 
