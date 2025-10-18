@@ -9,4 +9,4 @@ Target=edk2-shell
 Description=Updating UEFI shell for GRUB
 When=PostTransaction
 NeedsTargets
-Exec=/usr/bin/cp /usr/share/edk2-shell/x64/Shell.efi /boot/EFI/tools/shellx64.efi
+Exec=/usr/bin/cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/EFI/tools/shellx64.efi

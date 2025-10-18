@@ -965,7 +965,7 @@ fi
 
 
 ###FILESYSTEM - BTRFS###
-#lAdd some extra software and configs when using BTRFS
+#Add some extra software and configs when using BTRFS
 if [ "$filesystem" = btrfs ] ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "BTRFS Configuration" \
@@ -1106,7 +1106,7 @@ if [ "$boot" = efi ]; then
 	#Install memtest86 for UEFI
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 		--title "Memtest86" \
-		--prgbox "Installing UEFI Tools" "arch-chroot /mnt pacman -S memtest86+-efi edk2-shell --noconfirm && cp /mnt/usr/share/edk2-shell/x64/Shell.efi /mnt/boot/EFI/tools/shellx64.efi" "$HEIGHT" "$WIDTH"
+		--prgbox "Installing UEFI Tools" "arch-chroot /mnt pacman -S memtest86+-efi edk2-shell --noconfirm && cp /mnt/usr/share/edk2-shell/x64/Shell_Full.efi /mnt/boot/EFI/tools/shellx64.efi" "$HEIGHT" "$WIDTH"
 fi
 if [ "$boot" = bios ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
