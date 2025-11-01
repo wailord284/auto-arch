@@ -124,7 +124,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - A significant amount of changes that may or may not align with the Arch Wiki or its suggestions
 - Some aspects are optimized for performance/convenience over security
     * If your system has 4GB+ of RAM, additional utilities will be installed which will use additional RAM to increase performance
-- Proprietary NVidia drivers are not configured. Only xf86-video-nouveau is installed
+- Proprietary NVidia drivers are not configured.
 
 # Todos
  - Finish working on implementing dialog prompts as functions
