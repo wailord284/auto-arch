@@ -587,11 +587,8 @@ EOF
 
 
 ###REPO AND KEY SETUP###
-#Add the following pacman repos to the installtion: multilib, aurmageddon, archlinuxcn
+#Add the following pacman repos to the installtion: aurmageddon, archlinuxcn
 cat << EOF >> /mnt/etc/pacman.conf
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-
 #wailord284 custom repo with many aur packages used by the Auto Arch Installer
 #https://wailord284.club/repo/aurmageddon/x86_64/
 [aurmageddon]
@@ -1277,7 +1274,7 @@ selection=${selection:- q}
 		9) #Lutris
 		echo "$green""Setting up Lutris""$reset"
 		arch-chroot /mnt pacman -S lutris wine-staging winetricks --noconfirm
-		arch-chroot /mnt pacman -S --needed --asdeps giflib lib32-giflib gnutls lib32-gnutls v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib sqlite lib32-sqlite libxcomposite lib32-libxcomposite ocl-icd lib32-ocl-icd libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2 lib32-sdl2 --noconfirm
+		arch-chroot /mnt pacman -S --needed --asdeps giflib gnutls v4l-utils libpulse alsa-plugins alsa-lib sqlite libxcomposite ocl-icd libva gtk3 gst-plugins-base-libs vulkan-icd-loader sdl2 --noconfirm
 		sleep 3s
 		;;
 
