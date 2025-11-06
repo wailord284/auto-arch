@@ -967,8 +967,6 @@ if [ "$filesystem" = btrfs ] ; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "BTRFS Configuration" \
 	--prgbox "Adding configs and software for BTRFS. This may take a moment and may appear frozen. Please wait..." "arch-chroot /mnt pacman -S snapper snap-pac btrfs-assistant udisks2-btrfs --noconfirm" "$HEIGHT" "$WIDTH"
-	#Add the btrfs binary to mkinitcpio for recovery situations
-	sed "s,BINARIES=(),BINARIES=(btrfs),g" -i /mnt/etc/mkinitcpio.conf
 	#Exclude .snapshots from plocate
 	sed "s,PRUNENAMES = \".git .hg .svn\",PRUNENAMES = \".git .hg .svn .snapshots\",g" -i /mnt/etc/updatedb.conf
 	#Change the snapper-cleanup timer run every six hours instead of once per day
