@@ -1145,9 +1145,9 @@ if [ "$encrypt" = y ]; then
 	rootTargetDiskUUID=$(blkid -s UUID -o value ${storagePartitions[2]})
 	#Check if the device is an SSD. If it is, enable discard - https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 	if [ "$deviceUsesSSD" = yes ]; then
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot rd.luks.options=discard root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot rd.luks.options=discard root=$rootTargetDisk loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	else
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	fi
 else
 	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
