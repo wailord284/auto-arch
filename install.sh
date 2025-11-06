@@ -533,7 +533,7 @@ clear
 defaultMkinitcpioHooks=$(grep HOOKS= /mnt/etc/mkinitcpio.conf | tail -n1)
 performanceMkinitcpioHooks="HOOKS=(systemd keyboard sd-vconsole autodetect microcode modconf kms block filesystems fsck)"
 sed "s,$defaultMkinitcpioHooks,$performanceMkinitcpioHooks,g" -i /mnt/etc/mkinitcpio.conf
-#Enable encryption mkinitcpio hook if needed and revert back to base/udev hooks as using the systemd one required additional changes
+#Enable encryption mkinitcpio hook if needed
 if [ "$encrypt" = y ]; then
 	encryptionMkinitcpioHooks="HOOKS=(systemd keyboard sd-vconsole autodetect microcode modconf kms block sd-encrypt filesystems fsck)"
 	sed "s,$performanceMkinitcpioHooks,$encryptionMkinitcpioHooks,g" -i /mnt/etc/mkinitcpio.conf
@@ -1145,12 +1145,12 @@ if [ "$encrypt" = y ]; then
 	rootTargetDiskUUID=$(blkid -s UUID -o value ${storagePartitions[2]})
 	#Check if the device is an SSD. If it is, enable discard - https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 	if [ "$deviceUsesSSD" = yes ]; then
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot rd.luks.options=discard root=$rootTargetDisk loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot rd.luks.options=discard root=$rootTargetDisk $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	else
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	fi
 else
-	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"$grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 fi
 #Change theme
 echo 'GRUB_THEME="/boot/grub/themes/arch-silence/theme.txt"' >> /mnt/etc/default/grub
