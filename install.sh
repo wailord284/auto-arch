@@ -531,11 +531,11 @@ clear
 ###MKINITCPIO###
 #Replace base and udev with systemd. Improves boot time slightly
 defaultMkinitcpioHooks=$(grep HOOKS= /mnt/etc/mkinitcpio.conf | tail -n1)
-performanceMkinitcpioHooks="HOOKS=(systemd keyboard autodetect microcode modconf kms sd-vconsole block filesystems fsck)"
+performanceMkinitcpioHooks="HOOKS=(systemd keyboard sd-vconsole autodetect microcode modconf kms block filesystems fsck)"
 sed "s,$defaultMkinitcpioHooks,$performanceMkinitcpioHooks,g" -i /mnt/etc/mkinitcpio.conf
 #Enable encryption mkinitcpio hook if needed and revert back to base/udev hooks as using the systemd one required additional changes
 if [ "$encrypt" = y ]; then
-	encryptionMkinitcpioHooks="HOOKS=(base udev keyboard keymap autodetect microcode modconf kms block encrypt filesystems fsck)"
+	encryptionMkinitcpioHooks="HOOKS=(systemd keyboard sd-vconsole autodetect microcode modconf kms block sd-encrypt filesystems fsck)"
 	sed "s,$performanceMkinitcpioHooks,$encryptionMkinitcpioHooks,g" -i /mnt/etc/mkinitcpio.conf
 fi
 #Arch has now made ZSTD the default. LZ4 is slightly faster but uses more disk space
@@ -1145,9 +1145,9 @@ if [ "$encrypt" = y ]; then
 	rootTargetDiskUUID=$(blkid -s UUID -o value ${storagePartitions[2]})
 	#Check if the device is an SSD. If it is, enable discard - https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 	if [ "$deviceUsesSSD" = yes ]; then
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"cryptdevice=UUID=$rootTargetDiskUUID:cryptroot:allow-discards root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot rd.luks.options=discard root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	else
-		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"cryptdevice=UUID=$rootTargetDiskUUID:cryptroot root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	fi
 else
 	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
