@@ -1150,7 +1150,7 @@ if [ "$encrypt" = y ]; then
 		sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"rd.luks.name=$rootTargetDiskUUID=cryptroot root=$rootTargetDisk loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 	fi
 else
-	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"audit=0 loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
+	sed "s,\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\",\GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 $grubCmdlineLinuxOptions\",g" -i /mnt/etc/default/grub
 fi
 #Change theme
 echo 'GRUB_THEME="/boot/grub/themes/arch-silence/theme.txt"' >> /mnt/etc/default/grub
