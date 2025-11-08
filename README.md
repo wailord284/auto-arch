@@ -16,8 +16,8 @@ The user will now be prompted to supply basic information such as hostname, user
 - XFCE configured and themed with whiskermenu
 - Support for [EXT4](https://wiki.archlinux.org/index.php/Ext4), [XFS](https://wiki.archlinux.org/index.php/XFS), [F2FS](https://wiki.archlinux.org/title/F2FS) or [BTRFS](https://wiki.archlinux.org/index.php/Btrfs) filesystems
     * EXT4 will use [fast_commit](https://wiki.archlinux.org/title/Ext4#Enabling_fast_commit)
-    * F2FS will use [ZSTD level 6 compression](https://wiki.archlinux.org/title/F2FS#Compression)
-    * BTRFS will use [zstd (level 3)](https://wiki.archlinux.org/index.php/Btrfs#Compression)
+    * F2FS will use [zstd (level 6) compression](https://wiki.archlinux.org/title/F2FS#Compression)
+    * BTRFS will use [zstd (level 3) compression](https://wiki.archlinux.org/index.php/Btrfs#Compression)
     * BTRFS scrub timer (monthly) will be enabled for the root directory
     * BTRFS snapshots with [Snapper](https://wiki.archlinux.org/title/Snapper) and [snap-pac](https://github.com/wesbarnett/snap-pac)
     * [Disable FSCK](https://wiki.archlinux.org/title/Improving_performance/Boot_process#Filesystem_mounts) mkinitcpio hook when using BTRFS

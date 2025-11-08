@@ -621,7 +621,7 @@ clear
 #Install desktop and software
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing desktop software" \
---prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver mesa-vdpau libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop powertop --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
@@ -939,7 +939,7 @@ if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery
 	#Install power saving tools and enable tlp
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Laptop" \
-	--prgbox "Setting up powersaving features" "arch-chroot /mnt pacman -S iw wireless-regdb ethtool powertop x86_energy_perf_policy xf86-input-synaptics tlp tlp-rdw --noconfirm && arch-chroot /mnt systemctl enable tlp.service" "$HEIGHT" "$WIDTH"
+	--prgbox "Setting up powersaving features" "arch-chroot /mnt pacman -S iw wireless-regdb ethtool x86_energy_perf_policy xf86-input-synaptics tlp tlp-rdw --noconfirm && arch-chroot /mnt systemctl enable tlp.service" "$HEIGHT" "$WIDTH"
 	#Add touchpad config
 	mv "$configFiles"/configs/xorg/70-synaptics.conf /mnt/etc/X11/xorg.conf.d/
 	#Laptop mode
@@ -1278,11 +1278,11 @@ selection=${selection:- q}
 
 		q) #Finish
 		#Unmount the drive and finish
+		umount -R /mnt
+		umount -R /mnt/boot
 		if [ "$encrypt" = y ]; then
 			cryptsetup close cryptroot
 		fi
-		umount -R /mnt
-		umount -R /mnt/boot
 		clear
 		echo -e "$green""Installation Complete. All drives have been unmounted and you can now reboot.\nThanks for installing!""$reset"
 		sleep 3s
