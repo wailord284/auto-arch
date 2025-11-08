@@ -31,6 +31,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Disabled ["Recents"](https://alexcabal.com/disabling-gnomes-recently-used-file-list-the-better-way) tab found in most file managers
 - Large amount of [sysctl configs](https://wiki.archlinux.org/index.php/Sysctl#Improving_performance) gathered from the Arch wiki to increase performance, stability and security
 - Automatic log rotation with [logrotate](https://wiki.archlinux.org/title/Logrotate)
+- Disable [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
 - [max zstd mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION)
 - [ly](https://codeberg.org/fairyglade/ly) display manager
@@ -103,7 +104,7 @@ The user will now be prompted to supply basic information such as hostname, user
     * [DNS Caching](https://wiki.archlinux.org/title/NetworkManager#DNS_caching_and_conditional_forwarding) and [DNSSEC](https://wiki.archlinux.org/title/NetworkManager#DNSSEC)
 - Optional Changes and Settings
     * [Disk encryption](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) for the root partition, enable [trim/discard](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)) if the device is an SSD and also disable [workqueue](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance) to increase performance
-    * [Disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations) and [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+    * [Disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations)
     * [Display network interface IP Addresses](https://github.com/wailord284/auto-arch/blob/main/configs/scripts/ttyinterfaces.sh) on TTY logins - Systemd service and script (disabled by default)
     * [Powertop](https://wiki.archlinux.org/title/Powertop#Apply_settings) systemd service disabled by default with --auto-tune
 - Optional post-install options

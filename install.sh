@@ -321,7 +321,7 @@ clear
 
 ###GRUB/SECURITY OPTIONS###
 #Ask if user wants to enable some options that can increase performance in some situations
-grubPerformanceOptions="mitigations=off transparent_hugepage=madvise nowatchdog quiet"
+grubPerformanceOptions="mitigations=off transparent_hugepage=madvise quiet"
 dialog --title "Performance Options" \
 	--defaultno \
 	--backtitle "$dialogBacktitle" \
@@ -1084,6 +1084,9 @@ mv "$configFiles"/configs/sysctl/30-system-tweak.conf /mnt/etc/sysctl.d/
 mv "$configFiles"/configs/sysctl/30-network.conf /mnt/etc/sysctl.d/
 #RAM and storage tweaks
 mv "$configFiles"/configs/sysctl/50-dirty-bytes.conf /mnt/etc/sysctl.d/
+#Disable watchdog
+mv "$configFiles"/configs/disable-watchdog.conf /mnt/etc/modprobe.d/
+mv "$configFiles"/configs/sysctl/10-disable-watchdog.conf /mnt/etc/sysctl.d/
 
 
 ###GRUB INSTALL###
@@ -1132,9 +1135,9 @@ fi
 #Also make sure to blacklist some watchdog modules which may keep watchdog loaded
 if [ "$enableGrubPerformanceOptions" = "y" ]; then
 	grubCmdlineLinuxOptions="$grubPerformanceOptions $grubCmdlineLinuxOptions"
-	mv "$configFiles"/configs/disable-watchdog.conf /mnt/etc/modprobe.d/
-	mv "$configFiles"/configs/sysctl/10-disable-watchdog.conf /mnt/etc/sysctl.d/
 fi
+#Add any additional options for grub
+grubCmdlineLinuxOptions="$grubCmdlineLinuxOptions nowatchdog"
 
 
 ###GRUB CONFIG###
