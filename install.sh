@@ -939,7 +939,7 @@ if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery
 	#Install power saving tools and enable tlp
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Laptop" \
-	--prgbox "Setting up powersaving features" "arch-chroot /mnt pacman -S iw wireless-regdb ethtool x86_energy_perf_policy xf86-input-synaptics tlp tlp-rdw --noconfirm && arch-chroot /mnt systemctl enable tlp.service" "$HEIGHT" "$WIDTH"
+	--prgbox "Setting up powersaving features" "arch-chroot /mnt pacman -S iw wireless-regdb ethtool x86_energy_perf_policy xf86-input-synaptics tlp tlp-rdw tlp-pd --noconfirm && arch-chroot /mnt systemctl enable tlp.service" "$HEIGHT" "$WIDTH"
 	#Add touchpad config
 	mv "$configFiles"/configs/xorg/70-synaptics.conf /mnt/etc/X11/xorg.conf.d/
 	#Laptop mode
@@ -996,8 +996,9 @@ sed "s,animation = none,animation = colormix,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock = none,bigclock = en,g" -i /mnt/etc/ly/config.ini
 sed "s,battery_id = null,battery_id = BAT0,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock_12hr = false,bigclock_12hr = true,g" -i /mnt/etc/ly/config.ini
+sed "s,hide_version_string = false,hide_version_string = true,g" -i /mnt/etc/ly/config.ini
 #Enabel ly
-arch-chroot /mnt systemctl enable ly.service > /dev/null 2>&1
+arch-chroot /mnt sudo systemctl enable ly@tty1.service > /dev/null 2>&1
 
 
 ###SYSTEMD###
