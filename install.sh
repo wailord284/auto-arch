@@ -998,8 +998,8 @@ sed "s,battery_id = null,battery_id = BAT0,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock_12hr = false,bigclock_12hr = true,g" -i /mnt/etc/ly/config.ini
 sed "s,hide_version_string = false,hide_version_string = true,g" -i /mnt/etc/ly/config.ini
 #Enabel ly
-arch-chroot /mnt sudo systemctl enable ly@tty1.service > /dev/null 2>&1
-
+arch-chroot /mnt systemctl enable ly@tty1.service > /dev/null 2>&1
+arch-chroot /mnt systemctl disable getty@tty1.service > /dev/null 2>&1
 
 ###SYSTEMD###
 #Set journal to output log contents to TTY12
