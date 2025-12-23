@@ -994,7 +994,7 @@ echo 'tcp_bbr' > /mnt/etc/modules-load.d/tcp_bbr.conf
 #Configure ly to animate and show more info
 sed "s,animation = none,animation = colormix,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock = none,bigclock = en,g" -i /mnt/etc/ly/config.ini
-sed "s,battery_id = null,battery_id = BAT0,g" -i /mnt/etc/ly/config.ini
+#sed "s,battery_id = null,battery_id = BAT1,g" -i /mnt/etc/ly/config.ini
 sed "s,bigclock_12hr = false,bigclock_12hr = true,g" -i /mnt/etc/ly/config.ini
 sed "s,hide_version_string = false,hide_version_string = true,g" -i /mnt/etc/ly/config.ini
 #Enabel ly
