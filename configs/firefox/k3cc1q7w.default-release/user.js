@@ -14,13 +14,8 @@ user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket",
 user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.newtabpage.introShown", true);
 user_pref("browser.safebrowsing.appRepURL", "");
-user_pref("browser.safebrowsing.blockedURIs.enabled", false);
-user_pref("browser.safebrowsing.downloads.enabled", false);
-user_pref("browser.safebrowsing.downloads.remote.enabled", false);
-user_pref("browser.safebrowsing.downloads.remote.url", "");
 user_pref("browser.safebrowsing.enabled", false);
 user_pref("browser.safebrowsing.malware.enabled", false);
-user_pref("browser.safebrowsing.phishing.enabled", false);
 user_pref("browser.selfsupport.url", "");
 user_pref("browser.send_pings", false);
 user_pref("browser.sessionstore.privacy_level", 0);
@@ -42,7 +37,6 @@ user_pref("dom.battery.enabled", false);
 user_pref("dom.private-attribution.submission.enabled", false);
 user_pref("dom.security.https_only_mode", true);
 user_pref("dom.security.https_only_mode_ever_enabled", true);
-user_pref("dom.webaudio.enabled", false);
 user_pref("experiments.activeExperiment", false);
 user_pref("experiments.enabled", false);
 user_pref("experiments.manifest.uri", "");
@@ -55,7 +49,8 @@ user_pref("extensions.pocket.enabled", false);
 user_pref("extensions.shield-recipe-client.api_url", "");
 user_pref("extensions.shield-recipe-client.enabled", false);
 user_pref("extensions.webservice.discoverURL", "");
-user_pref("media.autoplay.default", 2);
+user_pref("media.autoplay.default", 0);
+user_pref("media.autoplay.enabled", true);
 user_pref("media.eme.enabled", false);
 user_pref("media.gmp-widevinecdm.enabled", false);
 user_pref("media.navigator.enabled", false);
@@ -66,6 +61,8 @@ user_pref("network.allow-experiments", false);
 user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.cookie.cookieBehavior", 1);
 user_pref("network.http.referer.spoofSource", true);
+user_pref("privacy.donottrackheader.enabled", true);
+user_pref("privacy.donottrackheader.value", 1);
 user_pref("privacy.globalprivacycontrol.enabled", true);
 user_pref("privacy.globalprivacycontrol.functionality.enabled", true);
 user_pref("privacy.query_stripping", true);
@@ -103,6 +100,20 @@ user_pref("webgl.vendor-string-override", " ");
 user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("layers.mlgpu.enabled", true);
 user_pref("layers.gpu-process.enabled", true);
+//Font cache
+user_pref("gfx.content.skia-font-cache-size", 32);
+//Increase RAM cache
+user_pref("browser.cache.memory.capacity", 131072);
+user_pref("browser.cache.memory.max_entry_size", 20480);
+user_pref("media.memory_cache_max_size", 262144);
+user_pref("media.memory_caches_combined_limit_kb", 1048576);
+//Image cache
+user_pref("image.mem.decode_bytes_at_a_time", 65536);
+user_pref("image.cache.size", 10485760);
+//Network
+user_pref("network.dnsCacheEntries", 10000);
+user_pref("network.dnsCacheExpiration", 3600);
+user_pref("network.http.max-connections", 1800);
 //###Peskyfox###
 //Disable recommendations
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
@@ -119,6 +130,7 @@ user_pref("browser.ml.enable", false);
 user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.ml.linkPreview.enabled", false);
 user_pref("browser.tabs.groups.smart.enabled", false);
+user_pref("browser.ml.linkPreview.enabled", false);
 //Use GTK bar
 user_pref("widget.gtk.non-native-titlebar-buttons.enabled", true);
 //Dark theme
