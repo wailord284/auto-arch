@@ -831,6 +831,8 @@ mv "$configFiles"/configs/bash/inputrc /mnt/etc/skel/.config/readline/
 mv "$configFiles"/configs/bash/.bashrc /mnt/etc/skel/
 cp /mnt/etc/skel/.config/readline/inputrc /mnt/root/.config/readline/
 cp /mnt/etc/skel/.bashrc /mnt/root/.bashrc
+#Move fonts.conf
+mv "$configFiles"/configs/fonts.conf /mnt/etc/skel/fontconfig/
 #Move Firefox config and set permissions for extra privacy
 mv "$configFiles"/configs/firefox/ /mnt/etc/skel/config/.mozilla/
 chmod -R 700 /mnt/etc/skel/config/.mozilla/firefox/
