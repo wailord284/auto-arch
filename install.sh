@@ -785,11 +785,11 @@ dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Configuring System" \
 --prgbox "Downloading config files" "wget https://github.com/wailord284/auto-arch/archive/main.zip && unzip main.zip && rm -r main.zip" "$HEIGHT" "$WIDTH"
 #Create /etc/skel dirs for configs to be applied to the new user
-mkdir -p /mnt/etc/skel/.config/{gtk-3.0,gtk-2.0,readline,kitty,psd,htop,dconf,trizen,nano,fontconfig}
+mkdir -p /mnt/etc/skel/.config/{gtk-3.0,gtk-2.0,readline,kitty,psd,htop,dconf,trizen,nano,fontconfig,mozilla}
 mkdir -p /mnt/etc/skel/.config/systemd/user/psd-resync.timer.d/
-mkdir -p /mnt/etc/skel/.local/share/
+mkdir -p /mnt/etc/skel/.local/share/mozilla
 mkdir -p /mnt/etc/skel/.local/state/
-mkdir -p /mnt/etc/skel/{.mozilla,.ssh}
+mkdir -p /mnt/etc/skel/.ssh
 mkdir -p /mnt/etc/skel/.cache/mozilla/firefox/
 #Create root user config directories
 mkdir -p /mnt/root/.config/{nano,readline}
@@ -832,8 +832,8 @@ mv "$configFiles"/configs/bash/.bashrc /mnt/etc/skel/
 cp /mnt/etc/skel/.config/readline/inputrc /mnt/root/.config/readline/
 cp /mnt/etc/skel/.bashrc /mnt/root/.bashrc
 #Move Firefox config and set permissions for extra privacy
-mv "$configFiles"/configs/firefox/ /mnt/etc/skel/.mozilla/
-chmod -R 700 /mnt/etc/skel/.mozilla/firefox/
+mv "$configFiles"/configs/firefox/ /mnt/etc/skel/config/.mozilla/
+chmod -R 700 /mnt/etc/skel/config/.mozilla/firefox/
 
 
 ###USER, PASSWORDS and PAM###
