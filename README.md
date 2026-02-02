@@ -25,30 +25,28 @@ The user will now be prompted to supply basic information such as hostname, user
 - Change mkinitcpio base and udev hooks to [systemd](https://wiki.archlinux.org/title/Improving_performance/Boot_process#Using_systemd_instead_of_busybox_on_early_init) to decrease boot time
 - GPG keyserver for Pacman changed to [keyserver.ubuntu.com](https://keyserver.ubuntu.com/)
 - Nano [syntax highlighting](https://github.com/scopatz/nanorc), line numbers and position log enabled
-- Preconfigured GPU accelerated terminal [Kitty](https://sw.kovidgoyal.net/kitty/)
 - Automatic detection for Intel and AMD CPUs to [install correct microcode](https://wiki.archlinux.org/index.php/Microcode#Installation)
 - Support for [Wacom touchscreen devices](https://wiki.archlinux.org/title/Graphics_tablet#Through_Xorg.conf) (like the Thinkpad X201T/X220T)
 - Disabled ["Recents"](https://alexcabal.com/disabling-gnomes-recently-used-file-list-the-better-way) tab found in most file managers
 - Large amount of [sysctl configs](https://wiki.archlinux.org/index.php/Sysctl#Improving_performance) gathered from the Arch wiki to increase performance, stability and security
 - Automatic log rotation with [logrotate](https://wiki.archlinux.org/title/Logrotate)
 - Disable [watchdog](https://wiki.archlinux.org/title/Improving_performance#Watchdogs)
+- Max zstd [mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION)
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
-- [max zstd mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION)
 - [ly](https://codeberg.org/fairyglade/ly) display manager
 - [Archlinuxcn](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#archlinuxcn) and [chaotic-aur](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#chaotic-aur) repositories for additional software
+- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~800 packages
 - [Earlyoom](https://github.com/rfjakob/earlyoom) daemon to trigger the Linux OOM killer sooner
 - [FSTrim timer](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM) to trim all SSDs weekly
 - [Zram](https://aur.archlinux.org/packages/zramswap/) instead of swap
 - [Modified IO Schedulers](https://wiki.archlinux.org/index.php/Improving_performance#Changing_I/O_scheduler) for hard drives, SATA SSDs and NVME drives
-- [Spindown hard drives after 20 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
+- [Spindown hard drives after 15 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
 - [b43-firmware](https://wireless.wiki.kernel.org/en/users/drivers/b43/firmware) and [sof-firmware](https://github.com/thesofproject/sof-bin/) installed if required
 - [Chrony](https://wiki.archlinux.org/title/Chrony) for system time using [NTS](https://docs.ntpsec.org/latest/NTS-QuickStart.html)
 - [Reflector](https://wiki.archlinux.org/title/Reflector#systemd_timer) timer enabled to sort mirrors weekly
 - [Enforce Stronger SSH encryption](https://www.sshaudit.com/hardening_guides.html) - Configure .ssh/config to use strong ciphers by default
 - [5 second delay between password attempts](https://wiki.archlinux.org/title/Security#Enforce_a_delay_after_a_failed_login_attempt)
-- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~800 packages
 - Changes if RAM is over 4GB
-    * [Profile-sync-daemon](https://wiki.archlinux.org/index.php/Profile-sync-daemon) - Copy Firefox profile into RAM and sync to disk every 15 minutes
     * [Anything-sync-daemon](https://wiki.archlinux.org/title/Anything-sync-daemon) - Copy Firefox cache into RAM and sync to disk every 15 minutes
 - Firefox changes:
     * [Ublock Origin](https://ublockorigin.com/) - Ad blocker

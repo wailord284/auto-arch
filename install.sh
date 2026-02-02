@@ -621,7 +621,7 @@ clear
 #Install desktop and software
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing desktop software" \
---prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp deno ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp profile-sync-daemon anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop powertop --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp deno ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop powertop --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
@@ -660,7 +660,7 @@ ramTotal=$(grep MemTotal /proc/meminfo | grep -Eo '[0-9]*')
 if [ "$ramTotal" -gt "4100000" ]; then
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Enabling Performance Services" \
-	--prgbox "Enabling profile-sync-daemon" "arch-chroot /mnt systemctl --global enable psd.service && arch-chroot /mnt systemctl enable asd.service" "$HEIGHT" "$WIDTH"
+	--prgbox "Enabling anything-sync-daemon" "arch-chroot /mnt systemctl enable asd.service" "$HEIGHT" "$WIDTH"
 fi
 clear
 
@@ -748,8 +748,8 @@ Defaults passwd_timeout=0
 Defaults env_reset,pwfeedback
 #Use nano for the sudo editor
 Defaults editor=/usr/bin/rnano, !env_editor
-#Allow the user to reboot and poweroff without a password and allow profile-sync-daemon to use overlayfs
-$user ALL=(ALL) NOPASSWD:/usr/bin/poweroff,/usr/bin/reboot,/usr/bin/psd-overlay-helper
+#Allow the user to reboot and poweroff without a password
+$user ALL=(ALL) NOPASSWD:/usr/bin/poweroff,/usr/bin/reboot
 #Uncomment to allow some commands to be executed without entering the user password
 #$user ALL=(ALL) NOPASSWD:/usr/bin/pacman,/usr/bin/trizen,/usr/bin/cpupower,/usr/bin/dmesg,/usr/bin/fstrim"
 #Log sudo usage
@@ -804,9 +804,6 @@ sed "s,set titlecolor bold\,lightwhite,set titlecolor bold\,red\,lightblack,g" -
 mv "$configFiles"/configs/trizen.conf /mnt/etc/skel/.config/trizen/
 #Move ssh config to enforce strong clientside ciphers
 mv "$configFiles"/configs/ssh-config /mnt/etc/skel/.ssh/config
-#Move profile-sync-daemon config
-mv "$configFiles"/configs/psd.conf /mnt/etc/skel/.config/psd/
-mv "$configFiles"/configs/systemd/psd-frequency.conf /mnt/etc/skel/.config/systemd/user/psd-resync.timer.d/frequency.conf
 #Move anything-sync-daemon config
 mv -f "$configFiles"/configs/asd.conf /mnt/etc/asd.conf
 sed "s,REPLACEME,$user,g" -i /mnt/etc/asd.conf
