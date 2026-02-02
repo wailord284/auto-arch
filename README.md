@@ -81,7 +81,6 @@ The user will now be prompted to supply basic information such as hostname, user
     * Use [mold](https://wiki.archlinux.org/title/Makepkg#Using_mold_linker) for linking
     * Set makeflags to use all cores when compiling (MAKEFLAGS="-j$(nproc)")
 - Systemd changes:
-    * [Journal log always visible](https://wiki.archlinux.org/index.php/Systemd/Journal#Forward_journald_to_/dev/tty12) on tty12 (control + alt + F12)
     * [Keep only 1024MB](https://wiki.archlinux.org/index.php/Systemd/Journal#Journal_size_limit) of Journald logs and compress them
     * [Disable coredump](https://wiki.archlinux.org/title/Core_dump#Using_systemd)
     * Disable systemd-userdbd

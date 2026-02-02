@@ -1003,9 +1003,6 @@ arch-chroot /mnt systemctl disable getty@tty1.service > /dev/null 2>&1
 
 
 ###SYSTEMD###
-#Set journal to output log contents to TTY12
-mkdir /mnt/etc/systemd/journald.conf.d
-mv "$configFiles"/configs/systemd/fw-tty12.conf /mnt/etc/systemd/journald.conf.d/
 #Set a lower systemd service timeout
 mkdir /mnt/etc/systemd/system.conf.d/
 mv "$configFiles"/configs/systemd/00-service-timeout.conf /mnt/etc/systemd/system.conf.d/
