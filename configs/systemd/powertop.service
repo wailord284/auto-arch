@@ -9,4 +9,4 @@ ExecStart=/usr/bin/powertop --auto-tune
 #ExecStart=/bin/bash -c "/usr/bin/echo on > /sys/bus/usb/devices/1-4.3/power/control"
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target sleep.target
