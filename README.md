@@ -50,7 +50,6 @@ The user will now be prompted to supply basic information such as hostname, user
     * [Anything-sync-daemon](https://wiki.archlinux.org/title/Anything-sync-daemon) - Copy Firefox cache into RAM and sync to disk every 15 minutes
 - Firefox changes:
     * [Ublock Origin](https://ublockorigin.com/) - Ad blocker
-    * [LocalCDN](https://www.localcdn.org/) - Local emulation of Content Delivery Networks
     * A privacy oriented prefs.js focused on compatibility made with [ffprofile](https://ffprofile.com/)
     * A custom user.js with changes based on [BetterFox](https://github.com/yokoffing/Betterfox)
 - Polkit changes:
