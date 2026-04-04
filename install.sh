@@ -841,8 +841,9 @@ clear
 arch-chroot /mnt useradd -m -G network,kvm,floppy,disk,storage,uucp,wheel,optical -s /bin/bash "$user"
 #Create normal user account password
 echo "$user":"$pass" | chpasswd -R /mnt
-#Set the root password
+#Set the root password and lock it
 echo "root":"$pass" | chpasswd -R /mnt
+arch-chroot /mnt passwd --lock root
 #Unset password variables to be extra safe
 unset pass1 pass2 pass encpass encpass1 encpass2
 #Setup stronger password security by increasing delay between password attempts to 5 seconds
