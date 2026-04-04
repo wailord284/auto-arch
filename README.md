@@ -97,7 +97,6 @@ The user will now be prompted to supply basic information such as hostname, user
     * [IPv6 privacy extensions](https://wiki.archlinux.org/title/IPv6#NetworkManager)
     * [Faster default DNS servers](https://wiki.archlinux.org/index.php/NetworkManager#Setting_custom_global_DNS_servers) - [Cloudflare 1.1.1.1](https://1.1.1.1/)
     * [Disable systemd-resolve](https://wiki.archlinux.org/title/NetworkManager#Unit_dbus-org.freedesktop.resolve1.service_not_found) to remove "unit dbus-org.freedesktop.resolve1.service not found" in journal log
-    * [DNS Caching](https://wiki.archlinux.org/title/NetworkManager#DNS_caching_and_conditional_forwarding) and [DNSSEC](https://wiki.archlinux.org/title/NetworkManager#DNSSEC)
 - Optional Changes and Settings
     * [Disk encryption](https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition) for the root partition, enable [trim/discard](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)) if the device is an SSD and also disable [workqueue](https://wiki.archlinux.org/title/Dm-crypt/Specialties#Disable_workqueue_for_increased_solid_state_drive_(SSD)_performance) to increase performance
     * [Disable CPU mitigations](https://wiki.archlinux.org/title/Improving_performance#Turn_off_CPU_exploit_mitigations)
