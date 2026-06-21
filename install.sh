@@ -958,6 +958,8 @@ if [ "$chassisType" = laptop ] || [ "$chassisType" = tablet ] || [ "$acpiBattery
 	mv "$configFiles"/configs/udev/81-wifi-powersave.rules /mnt/etc/udev/rules.d/
 	#Set WiFi region to US. Needed for some laptops like the Framework 16 to get faster speeds
 	sed "s,#WIRELESS_REGDOM=\"US\",WIRELESS_REGDOM=\"US\",g" -i /mnt/etc/conf.d/wireless-regdom
+	#More powersaving - https://wiki.cachyos.org/configuration/general_system_tweaks/
+	grubCmdlineLinuxOptions="rcutree.enable_rcu_lazy=1 $grubCmdlineLinuxOptions"
 	clear
 fi
 
@@ -977,7 +979,7 @@ if [ "$filesystem" = btrfs ] ; then
 	mv "$configFiles"/configs/systemd/snapper-firstboot.service /mnt/etc/systemd/system/
 	arch-chroot /mnt systemctl enable snapper-firstboot.service btrfs-scrub@-.timer > /dev/null 2>&1
 	#Skip FSCK for btrfs since it is not needed. Also remove the fsck mkinitcpio hook
-	grubCmdlineLinuxOptions="fsck.mode=skip"
+	grubCmdlineLinuxOptions="fsck.mode=skip $grubCmdlineLinuxOptions"
 	grep HOOKS= /mnt/etc/mkinitcpio.conf | tail -n1 | sed -e "s/ fsck//g" -i /mnt/etc/mkinitcpio.conf
 	arch-chroot /mnt mkinitcpio -P > /dev/null 2>&1
 	#Mask the fsck service as well just in case
