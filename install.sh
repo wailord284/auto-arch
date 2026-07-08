@@ -1049,14 +1049,14 @@ arch-chroot /mnt systemctl enable reflector.timer > /dev/null 2>&1
 #Setup Chrony for time syncing. Better for laptops
 cat << EOF > /mnt/etc/chrony.conf
 #NTS Servers - https://github.com/jauderho/nts-servers
-server time.cloudflare.com nts iburst maxsources 4 offline
-server ohio.time.system76.com nts iburst maxsources 4 offline
-server oregon.time.system76.com nts iburst maxsources 4 offline
-server virginia.time.system76.com nts iburst maxsources 4 offline
+server time.cloudflare.com nts iburst offline
+server ohio.time.system76.com nts iburst offline
+server oregon.time.system76.com nts iburst offline
+server virginia.time.system76.com nts iburst offline
 
 #Misc time correction options
 maxupdateskew 100
-minsources 2
+minsources 1
 maxdrift 100
 makestep 1.0 3
 
@@ -1070,8 +1070,9 @@ ntsdumpdir /var/lib/chrony
 leapseclist /usr/share/zoneinfo/leap-seconds.list
 EOF
 #Have NetworkManager inform Chrony of on/offline status for laptops.
-arch-chroot /mnt ln -s /usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline /etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh > /dev/null 2>&1
-chmod +x /mnt/usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline
+arch-chroot /mnt cp /usr/share/doc/chrony/examples/chrony.nm-dispatcher.onoffline /etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh
+chmod +x /mnt/etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh
+chmod 700 /mnt/etc/NetworkManager/dispatcher.d/20-chrony-onoffline.sh
 clear
 
 
