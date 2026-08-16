@@ -475,7 +475,7 @@ if [ "$boot" = bios ] || [ "$boot" = efi ]; then
 	#Mount and partition the boot partition
 	dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 	--title "Partitioning Disk" \
-	--prgbox "Formatting boot partition" "mkfs.fat -F32 -n ArchBoot ${storagePartitions[1]}" "$HEIGHT" "$WIDTH"
+	--prgbox "Formatting boot partition" "mkfs.fat -F32 -n ARCHBOOT ${storagePartitions[1]}" "$HEIGHT" "$WIDTH"
 	mount --mkdir "${storagePartitions[1]}" /mnt/boot
 fi
 clear
