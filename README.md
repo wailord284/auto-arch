@@ -35,12 +35,12 @@ The user will now be prompted to supply basic information such as hostname, user
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
 - [ly](https://codeberg.org/fairyglade/ly) display manager
 - [Archlinuxcn](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#archlinuxcn) and [chaotic-aur](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#chaotic-aur) repositories for additional software
-- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~800 packages
+- [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~200 packages
 - [Earlyoom](https://github.com/rfjakob/earlyoom) daemon to trigger the Linux OOM killer sooner
 - [FSTrim timer](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM) to trim all SSDs weekly
 - [Zram](https://aur.archlinux.org/packages/zramswap/) instead of swap
 - [Modified IO Schedulers](https://wiki.archlinux.org/index.php/Improving_performance#Changing_I/O_scheduler) for hard drives, SATA SSDs and NVME drives
-- [Spindown hard drives after 15 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
+- [Spindown hard drives after 30 minutes](https://wiki.archlinux.org/index.php/Hdparm#Power_management_configuration) using hdparm in udev
 - [b43-firmware](https://wireless.wiki.kernel.org/en/users/drivers/b43/firmware) and [sof-firmware](https://github.com/thesofproject/sof-bin/) installed if required
 - [Chrony](https://wiki.archlinux.org/title/Chrony) for system time using [NTS](https://docs.ntpsec.org/latest/NTS-QuickStart.html)
 - [Reflector](https://wiki.archlinux.org/title/Reflector#systemd_timer) timer enabled to sort mirrors weekly
@@ -68,6 +68,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Grub changes:
     * [UEFI tools:](https://github.com/wailord284/auto-arch/tree/master/configs/grub/tools) [UEFI Shell](https://github.com/pbatard/UEFI-Shell), [Memtest86](https://memtest.org/)
     * Arch Linux [theme](https://github.com/fghibellini/arch-silence)
+    * [Password protect the GRUB menu](https://wiki.archlinux.org/title/GRUB/Tips_and_tricks#Password_protection_of_GRUB_menu) when using encryption
 - Pacman changes:
     * [Kernel Modules hook](https://github.com/saber-nyan/kernel-modules-hook) - Restore functionality when the running kernel updates
     * Package cleanup hook to minimize the pacman cache size when updating
