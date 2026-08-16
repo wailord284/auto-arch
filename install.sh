@@ -321,7 +321,7 @@ clear
 
 ###GRUB/SECURITY OPTIONS###
 #Ask if user wants to enable some options that can increase performance in some situations
-grubPerformanceOptions="mitigations=off transparent_hugepage=madvise quiet"
+grubPerformanceOptions="mitigations=off transparent_hugepage=always quiet"
 dialog --title "Performance Options" \
 	--defaultno \
 	--backtitle "$dialogBacktitle" \
