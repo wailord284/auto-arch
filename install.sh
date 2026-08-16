@@ -1172,8 +1172,8 @@ mv "$configFiles"/configs/grub/custom.cfg /mnt/boot/grub/
 #Check encryption and if so, set grub password
 if [ "$encrypt" = y ]; then
 	grubpassword="$(yes "$encpass" | grub-mkpasswd-pbkdf2 | grep -oP '.{0}grub.*')"
-	sed "1s/^/password_pbkdf2 $user $grubpassword\n/" -i /mnt/boot/grub/
-	sed "1s/^/set superusers=\"$user\"\n/" -i /mnt/boot/grub/
+	sed "1s/^/password_pbkdf2 $user $grubpassword\n/" -i /mnt/boot/grub/custom.cfg
+	sed "1s/^/set superusers=\"$user\"\n/" -i /mnt/boot/grub/custom.cfg
 fi
 #Generate grubcfg
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
