@@ -1169,12 +1169,6 @@ mkdir -p /mnt/boot/EFI/tools
 cp /mnt/usr/share/edk2-shell/x64/Shell_Full.efi /mnt/boot/EFI/tools/shellx64.efi
 #Add custom menus
 mv "$configFiles"/configs/grub/custom.cfg /mnt/boot/grub/
-#Check encryption and if so, set grub password
-if [ "$encrypt" = y ]; then
-	grubpassword="$(yes "$encpass" | grub-mkpasswd-pbkdf2 | grep -oP '.{0}grub.*')"
-	sed "1s/^/password_pbkdf2 $user $grubpassword\n/" -i /mnt/boot/grub/custom.cfg
-	sed "1s/^/set superusers=\"$user\"\n/" -i /mnt/boot/grub/custom.cfg
-fi
 #Generate grubcfg
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "GRUB Configuration" \

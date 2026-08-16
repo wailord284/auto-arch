@@ -68,7 +68,6 @@ The user will now be prompted to supply basic information such as hostname, user
 - Grub changes:
     * [UEFI tools:](https://github.com/wailord284/auto-arch/tree/master/configs/grub/tools) [UEFI Shell](https://github.com/pbatard/UEFI-Shell), [Memtest86](https://memtest.org/)
     * Arch Linux [theme](https://github.com/fghibellini/arch-silence)
-    * [Password protect the GRUB menu](https://wiki.archlinux.org/title/GRUB/Tips_and_tricks#Password_protection_of_GRUB_menu) when using encryption
 - Pacman changes:
     * [Kernel Modules hook](https://github.com/saber-nyan/kernel-modules-hook) - Restore functionality when the running kernel updates
     * Package cleanup hook to minimize the pacman cache size when updating
