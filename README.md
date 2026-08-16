@@ -34,7 +34,7 @@ The user will now be prompted to supply basic information such as hostname, user
 - Max zstd [mkinitcpio compression](https://wiki.archlinux.org/index.php/Mkinitcpio#COMPRESSION)
 - [Pipewire](https://wiki.archlinux.org/title/PipeWire) for audio
 - [ly](https://codeberg.org/fairyglade/ly) display manager
-- [Archlinuxcn](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#archlinuxcn) and [chaotic-aur](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#chaotic-aur) repositories for additional software
+- [chaotic-aur](https://wiki.archlinux.org/index.php/Unofficial_user_repositories#chaotic-aur) repositories for additional software
 - [Aurmageddon](https://wailord284.club/) repository maintained by me. Contains ~200 packages
 - [Earlyoom](https://github.com/rfjakob/earlyoom) daemon to trigger the Linux OOM killer sooner
 - [FSTrim timer](https://wiki.archlinux.org/index.php/Solid_state_drive#Periodic_TRIM) to trim all SSDs weekly
@@ -116,7 +116,7 @@ The user will now be prompted to supply basic information such as hostname, user
 # Things to consider when using this installer
 - NO automatic updates or GUI package manager. You are expected to update the system regularly!
 - NO manual partitioning (you can only select the drive) or dual booting
-- Third party repositories enabled by default (archlinuxcn, chaotic-aur, aurmageddon)
+- Third party repositories enabled by default (chaotic-aur, aurmageddon)
 - A significant amount of changes that may or may not align with the Arch Wiki or its suggestions
 - Some aspects are optimized for performance/convenience over security
     * If your system has 4GB+ of RAM, additional utilities will be installed which will use additional RAM to increase performance

@@ -589,27 +589,19 @@ EOF
 ###REPO AND KEY SETUP###
 #Add the following pacman repos to the installtion: aurmageddon, archlinuxcn
 cat << EOF >> /mnt/etc/pacman.conf
+#Chaotic-aur repo with many packages
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+
 #wailord284 custom repo with many aur packages used by the Auto Arch Installer
 #https://wailord284.club/repo/aurmageddon/x86_64/
 [aurmageddon]
 Server = https://wailord284.club/repo/\$repo/\$arch
 SigLevel = Never
-
-#China archlinux repo with many aur packages
-[archlinuxcn]
-Server = https://mirrors.xtom.us/archlinuxcn/\$arch
-Server = https://mirrors.ocf.berkeley.edu/archlinuxcn/\$arch
-Server = https://repo.archlinuxcn.org/\$arch
-
 EOF
 #Add the Ubuntu keyserver to gpg. Also allow for SHA1 signatures
 echo "keyserver hkp://keyserver.ubuntu.com" >> /mnt/etc/pacman.d/gnupg/gpg.conf
 echo "allow-weak-key-signatures" >> /mnt/etc/pacman.d/gnupg/gpg.conf
-#Reinstall keyring in case of gpg errors and add the archlinuxcn and chaotic keyrings
-dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Installing keys" \
---prgbox "Installing Archlinuxcn keyring. This may take a moment and may appear frozen. Please wait..." "arch-chroot /mnt pacman-key --recv-key CE536327AED18EABC3B99A17F4AA4E0ED2568E87 && arch-chroot /mnt pacman-key --lsign-key CE536327AED18EABC3B99A17F4AA4E0ED2568E87 && arch-chroot /mnt pacman-key --lsign-key 'farseerfc@archlinux.org' && arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S archlinux-keyring archlinuxcn-keyring --noconfirm" "$HEIGHT" "$WIDTH"
-clear
 #Import the chaotic-aur key
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing keys" \
@@ -621,26 +613,12 @@ clear
 #Install desktop and software
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing desktop software" \
---prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syy && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp deno ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop powertop ntfsprogs ntfs-3g nvme-cli --noconfirm" "$HEIGHT" "$WIDTH"
+--prgbox "Installing desktop environment" "arch-chroot /mnt pacman -Syyu --noconfirm && arch-chroot /mnt pacman -S --needed wget nano xfce4 xfce4-panel xfwm4 xfce4-whiskermenu-plugin xfce4-cpufreq-plugin xfce4-pulseaudio-plugin xfce4-notifyd xfce4-screenshooter xfce4-sensors-plugin xfce4-terminal xfce4-screensaver thunar-archive-plugin network-manager-applet nm-connection-editor networkmanager gparted gnome-disk-utility thunderbird xarchiver lzip lzop cpio zip unzip htop libreoffice-fresh hunspell-en_US jre-openjdk deluge-gtk bleachbit mate-calc geeqie mpv mousepad papirus-icon-theme ttf-ubuntu-font-family ttf-ibm-plex bash-completion pavucontrol yt-dlp deno ffmpeg python-mutagen openssh gvfs-mtp cpupower ttf-dejavu ttf-liberation noto-fonts dmidecode macchanger smartmontools fastfetch xorg-xev dnsmasq nano-syntax-highlighting s-tui imagemagick libxpresent freetype2 rsync acpi keepassxc xclip noto-fonts-emoji unrar earlyoom xorg-xrandr iotop libva-mesa-driver libvdpau-va-gl vdpauinfo libva-utils gpart vulkan-icd-loader firefox firefox-ublock-origin hdparm usbutils logrotate systembus-notify tldr kitty kernel-modules-hook plocate mesa-utils xorg-xkill f2fs-tools xorg-xhost exfatprogs gsmartcontrol remmina libvncserver freerdp anything-sync-daemon reflector xorg-server xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-gtk mold gst-plugins-good 7zip ly xorg-xauth pipewire wireplumber pipewire-alsa pipewire-pulse bind chrony nvtop powertop ntfsprogs ntfs-3g nvme-cli trizen ttf-symbola pokemon-colorscripts-git arch-silence-grub-theme-git bibata-cursor-translucent usbimager matcha-gtk-theme nordic-theme nordic-darker-standard-buttons-theme pacman-cleanup-hook zramswap redshift-minimal --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 #Additional aurmageddon packages
 dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
 --title "Installing additional desktop software" \
---prgbox "Installing Aurmageddon packages" "arch-chroot /mnt pacman -S trizen ttf-symbola pokemon-colorscripts-git arch-silence-grub-theme-git bibata-cursor-translucent usbimager matcha-gtk-theme nordic-theme nordic-darker-standard-buttons-theme pacman-cleanup-hook ttf-unifont lscolors-git zramswap pacman-updatedb-hook redshift-minimal zafiro-icon-theme nulloy autoaspm-git --noconfirm" "$HEIGHT" "$WIDTH"
-clear
-
-
-###SETUP CHAOTIC-AUR REPO###
-#Add chaotic-aur to pacman.conf. Currently nothing is installed from this
-cat << EOF >> /mnt/etc/pacman.conf
-#Chaotic-aur repo with many packages
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist
-EOF
-#Update pacman repos on the new installation and Arch ISO
-dialog --scrollbar --timeout 1 --backtitle "$dialogBacktitle" \
---title "Updating repos" \
---prgbox "Updating pacman repos for chaotic-aur" "arch-chroot /mnt pacman -Syy && pacman -Syy" "$HEIGHT" "$WIDTH"
+--prgbox "Installing Aurmageddon packages" "arch-chroot /mnt pacman -S ttf-unifont lscolors-git pacman-updatedb-hook zafiro-icon-theme nulloy autoaspm-git --noconfirm" "$HEIGHT" "$WIDTH"
 clear
 
 
